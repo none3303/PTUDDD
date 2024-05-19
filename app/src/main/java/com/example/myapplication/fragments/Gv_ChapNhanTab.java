@@ -1,21 +1,20 @@
 package com.example.myapplication.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Gv_DangChoTab#newInstance} factory method to
+ * Use the {@link Gv_ChapNhanTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Gv_DangChoTab extends Fragment {
+public class Gv_ChapNhanTab extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +25,7 @@ public class Gv_DangChoTab extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Gv_DangChoTab() {
+    public Gv_ChapNhanTab() {
         // Required empty public constructor
     }
 
@@ -39,8 +38,8 @@ public class Gv_DangChoTab extends Fragment {
      * @return A new instance of fragment Gv_DangChoTab.
      */
     // TODO: Rename and change types and number of parameters
-    public static Gv_DangChoTab newInstance(String param1, String param2) {
-        Gv_DangChoTab fragment = new Gv_DangChoTab();
+    public static Gv_ChapNhanTab newInstance(String param1, String param2) {
+        Gv_ChapNhanTab fragment = new Gv_ChapNhanTab();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +60,6 @@ public class Gv_DangChoTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gv__dang_cho_tab, container, false);
+        return inflater.inflate(R.layout.fragment_gv__chap_nhan_tab, container, false);
     }
 }
