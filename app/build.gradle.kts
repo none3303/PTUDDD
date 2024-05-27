@@ -41,6 +41,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     // hinh tron
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    // button action
+    implementation("com.github.rubensousa:floatingtoolbar:1.5.1")
 
 
 }
