@@ -1,6 +1,8 @@
 package com.example.myapplication.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private int id;
     private String username;
@@ -36,6 +38,14 @@ public class User {
         this.role = role;
         this.studentCode = studentCode;
         this.teacherId = teacherId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
