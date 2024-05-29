@@ -20,4 +20,8 @@ public class UserConstants {
     public static final String TEACHER_ID="teacherId";
     public static final String STUDENT_CODE="studentCode";
 
+    //
+    public static final String GENDER_MALE="Nam";
+    public static final String GENDER_FEMALE="Nữ";
+
 }
