@@ -11,5 +11,7 @@
     <color name="light_yellow">#fcfaf4</color>
     <color name="blue">#5993f8</color>
     <color name="green">#74ff81</color>
+    <color name="border_color">#61677A</color>
+
 
 </resources>

@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
+import com.example.myapplication.dao.UserDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,5 +32,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, GV_DatLichActivity.class);
             startActivity(intent);
         });
+        UserDAO userDAO=new UserDAO(this);
     }
 }
