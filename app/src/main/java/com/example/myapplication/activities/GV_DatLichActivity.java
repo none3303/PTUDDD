@@ -31,6 +31,12 @@ public class GV_DatLichActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
+
+        //set up viewpager with tablayout
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setText("Đang chờ");
+        tabLayout.getTabAt(1).setText("Chấp nhận");
+        tabLayout.getTabAt(2).setText("Từ chối");
+
     }
 }

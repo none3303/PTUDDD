@@ -36,19 +36,22 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        init();
+        //init();
+        getWidth();
         login.setOnClickListener(v -> {
             String reqUsername=editUsername.getText().toString();
             String reqPassword=editPassword.getText().toString();
-            User user=userDAO.getUserByUsername(reqUsername);
-            if(user!=null&&user.getPassword().equals(reqPassword)){
-                Intent intent = new Intent(this, TestActivity.class);
-                intent.putExtra("user",user);
-                startActivity(intent);
-            }
-            else {
-                txtError.setText("Sai tên đăng nhập hoặc mặt khẩu");
-            }
+            //User user=userDAO.getUserByUsername(reqUsername);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+//            if(user!=null&&user.getPassword().equals(reqPassword)){
+//                Intent intent = new Intent(this, TestActivity.class);
+//                intent.putExtra("user",user);
+//                startActivity(intent);
+//            }
+//            else {
+//                txtError.setText("Sai tên đăng nhập hoặc mặt khẩu");
+//            }
         });
     }
     public void getWidth(){
@@ -60,5 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     public void init(){
         getWidth();
         userDAO=new UserDAO(this);
+        userDAO.addUser(new User("giaoviena","123456","abc","nam","hn","12","12","123456","gva@email.com","123456","teacher","","123456"));
     }
 }
