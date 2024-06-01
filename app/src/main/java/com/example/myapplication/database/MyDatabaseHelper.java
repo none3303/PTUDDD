@@ -12,9 +12,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "bookingApp";
     private static final int DATABASE_VERSION = 1;
 
-    public MyDatabaseHelper( Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    private static MyDatabaseHelper instance;
 
+    public static synchronized MyDatabaseHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new MyDatabaseHelper(context.getApplicationContext());
+        }
+        return instance;
+    }
+
+    public  MyDatabaseHelper( Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -56,5 +64,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+UserConstants.TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS "+ BookingConstants.TABLE_BOOKING);
         onCreate(db);
+    }
+    public synchronized void close() {
+        if (instance != null) {
+            super.close();
+            instance = null;
+        }
     }
 }

@@ -11,10 +11,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
+import com.example.myapplication.constants.BookingConstants;
+import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
+import com.example.myapplication.models.Booking;
+import com.example.myapplication.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
+    BookingDAO bookingDAO;
+    UserDAO userDAO;
     Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,19 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, GV_DatLichActivity.class);
             startActivity(intent);
         });
-        UserDAO userDAO=new UserDAO(this);
+//        bookingDAO = new BookingDAO(this);
+//        bookingDAO.addBooking(new Booking(1,"12","12","12", BookingConstants.ACCEPT,4,1));
+//        bookingDAO.addBooking(new Booking(2,"12","12","12", BookingConstants.REJECT,4,1));
+//        bookingDAO.addBooking(new Booking(3,"12","12","12", BookingConstants.PENDING,4,1));
+//        userDAO = new UserDAO(this);
+//        userDAO.addUser(new User("1","1","1","1","1","1","1","1","1","1","1","1",""));
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        bookingDAO.close();
+        userDAO.close();
+        super.onDestroy();
     }
 }

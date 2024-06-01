@@ -28,7 +28,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
     public GV_DatLichListAdapter(Context context, List<Booking> bookings) {
         super(context, 0, bookings);
         this.originalBooks = new ArrayList<>(bookings);
-        this.originalBooks = new ArrayList<>(bookings);
+        this.filteredBooks = new ArrayList<>(bookings);
     }
     @Override
     public int getCount() {
@@ -46,7 +46,6 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_gv_datlich_custom_item_view, parent, false);
         }
-
         getWidth(convertView);
 
         tvNumber.setText(String.valueOf(position + 1));
@@ -91,6 +90,10 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
         notifyDataSetChanged();
     }
 
+    public boolean isFilteredListEmpty() {
+        return filteredBooks.isEmpty();
+    }
+
     private boolean tryParseInt(String text) {
         try {
             Integer.parseInt(text);
@@ -99,5 +102,4 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
             return false;
         }
     }
-
 }

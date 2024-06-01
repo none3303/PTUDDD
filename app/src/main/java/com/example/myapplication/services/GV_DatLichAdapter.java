@@ -33,4 +33,5 @@ public class GV_DatLichAdapter extends FragmentStatePagerAdapter {
         }
         return null;
     }
+
 }

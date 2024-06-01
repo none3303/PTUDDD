@@ -17,7 +17,7 @@ public class UserDAO {
     private MyDatabaseHelper dbHelper;
 
     public UserDAO(Context context) {
-        dbHelper = new MyDatabaseHelper(context);
+        dbHelper = MyDatabaseHelper.getInstance(context);
         db = dbHelper.getWritableDatabase();
     }
     public void addUser(User user) {
@@ -67,33 +67,44 @@ public class UserDAO {
         return null;
     }
 
-    public User getUserByStudentId(String userId){
-        Cursor cursor = db.query(UserConstants.TABLE_USER,new String[]{"id", UserConstants.STUDENT_CODE},UserConstants.STUDENT_CODE + "=?", new String[]{userId}, null, null, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                User user = new User(
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        cursor.getString(6),
-                        cursor.getString(7),
-                        cursor.getString(8),
-                        cursor.getString(9),
-                        cursor.getString(10),
-                        cursor.getString(11),
-                        cursor.getString(12),
-                        cursor.getString(13)
-                );
-                user.setId(cursor.getInt(0));
-                cursor.close();
-                return user;
+    public User getUserByStudentId(String studentId) {
+        Cursor cursor = null;
+        try {
+            cursor = db.query(
+                    UserConstants.TABLE_USER,
+                    new String[]{"id", UserConstants.USERNAME, UserConstants.PASSWORD, UserConstants.FULL_NAME, UserConstants.GENDER, UserConstants.ADDRESS, UserConstants.PLACE_OF_BIRTH, UserConstants.DATE_OF_BIRTH, UserConstants.ID_CARD, UserConstants.EMAIL, UserConstants.PHONE, UserConstants.ROLE, UserConstants.STUDENT_CODE, UserConstants.TEACHER_ID},
+                    UserConstants.STUDENT_CODE + "=?",
+                    new String[]{studentId},
+                    null, null, null, null
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                String id = cursor.getString(cursor.getColumnIndexOrThrow("id"));
+                String username = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.USERNAME));
+                String studentIdFromDb = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.STUDENT_CODE));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.EMAIL));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.PASSWORD));
+                String fullName = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.FULL_NAME));
+                String gender = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.GENDER));
+                String address = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.ADDRESS));
+                String placeOfBirth = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.PLACE_OF_BIRTH));
+                String dateOfBirth = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.DATE_OF_BIRTH));
+                String idCard = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.ID_CARD));
+                String phone = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.PHONE));
+                String role = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.ROLE));
+                String teacherId = cursor.getString(cursor.getColumnIndexOrThrow(UserConstants.TEACHER_ID));
+                return new User(username, password, fullName, gender, address, placeOfBirth, dateOfBirth, idCard, email,phone, role, studentIdFromDb,teacherId);
+            } else {
+                return null;
             }
-            cursor.close();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        return null;
     }
+
+
     public void deleteUser(int userId) {
         db.delete(UserConstants.TABLE_USER, "id" + " = ?", new String[]{String.valueOf(userId)});
         db.close();
@@ -146,4 +157,7 @@ public class UserDAO {
         return userList;
     }
 
+    public void close() {
+        db.close();
+    }
 }
