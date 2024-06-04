@@ -9,7 +9,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
+import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.dao.UserDAO;
+import com.example.myapplication.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,5 +26,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         UserDAO userDAO=new UserDAO(this);
+
     }
 }

@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
+import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.dao.UserDAO;
 import com.example.myapplication.models.User;
 import com.google.android.material.textfield.TextInputEditText;
@@ -40,15 +41,20 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(v -> {
             String reqUsername=editUsername.getText().toString();
             String reqPassword=editPassword.getText().toString();
-            User user=userDAO.getUserByUsername(reqUsername);
-            if(user!=null&&user.getPassword().equals(reqPassword)){
-                Intent intent = new Intent(this, TestActivity.class);
-                intent.putExtra("user",user);
-                startActivity(intent);
+            try{
+                User user=userDAO.getUserByUsername(reqUsername);
+                if(user!=null&&user.getPassword().equals(reqPassword)){
+                    Intent intent = new Intent(this, TestActivity.class);
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+                }
+                else {
+                    txtError.setText("Sai tên đăng nhập hoặc mặt khẩu");
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
-            else {
-                txtError.setText("Sai tên đăng nhập hoặc mặt khẩu");
-            }
+
         });
     }
     public void getWidth(){
@@ -60,5 +66,19 @@ public class LoginActivity extends AppCompatActivity {
     public void init(){
         getWidth();
         userDAO=new UserDAO(this);
+        // Chay 1 lan xong comment lai
+//        User tanh=new User();
+//        tanh.setUsername("tanh123");
+//        tanh.setPassword("123");
+//        tanh.setFullName("Do Tien Anh");
+//        tanh.setIdCard("2021600552");
+//        tanh.setPhone("0865923203");
+//        tanh.setStudentCode("2021600552");
+//        tanh.setGender(UserConstants.GENDER_MALE);
+//        tanh.setEmail("dtienanh1213@gmail.com");
+//        tanh.setDateOfBirth("19/09/2003");
+//        tanh.setAddress("Ha Noi");
+//        tanh.setPlaceOfBirth("Ha Noi");
+//        userDAO.addUser(tanh);
     }
 }
