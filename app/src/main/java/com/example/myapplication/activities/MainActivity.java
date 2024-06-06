@@ -15,6 +15,7 @@ import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
 import com.example.myapplication.models.Booking;
+import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.models.User;
 
 public class MainActivity extends AppCompatActivity {

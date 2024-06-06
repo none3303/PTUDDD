@@ -21,6 +21,7 @@ public class UserDAO {
         db = dbHelper.getWritableDatabase();
     }
     public void addUser(User user) {
+
         ContentValues values = new ContentValues();
         values.put(UserConstants.USERNAME, user.getUsername());
         values.put(UserConstants.PASSWORD, user.getPassword());
@@ -36,7 +37,7 @@ public class UserDAO {
         values.put(UserConstants.STUDENT_CODE, user.getStudentCode());
         values.put(UserConstants.TEACHER_ID, user.getTeacherId());
         db.insert(UserConstants.TABLE_USER, null, values);
-        db.close();
+//        db.close();
     }
     public User getUserByUsername(String username) {
         Cursor cursor = db.query(UserConstants.TABLE_USER, new String[]{"id", UserConstants.USERNAME, UserConstants.PASSWORD, UserConstants.FULL_NAME, UserConstants.GENDER, UserConstants.ADDRESS, UserConstants.PLACE_OF_BIRTH, UserConstants.DATE_OF_BIRTH, UserConstants.ID_CARD, UserConstants.EMAIL, UserConstants.PHONE, UserConstants.ROLE, UserConstants.STUDENT_CODE, UserConstants.TEACHER_ID},
@@ -59,11 +60,15 @@ public class UserDAO {
                         cursor.getString(13)
                 );
                 user.setId(cursor.getInt(0));
-                cursor.close();
+//                db.close();
+//                cursor.close();
                 return user;
             }
-            cursor.close();
+//            db.close();
+//            cursor.close();
         }
+//        cursor.close();
+//        db.close();
         return null;
     }
 
@@ -107,7 +112,7 @@ public class UserDAO {
 
     public void deleteUser(int userId) {
         db.delete(UserConstants.TABLE_USER, "id" + " = ?", new String[]{String.valueOf(userId)});
-        db.close();
+//        db.close();
     }
     public int updateUser(User user) {
         ContentValues values = new ContentValues();
@@ -153,7 +158,7 @@ public class UserDAO {
                 userList.add(user);
             } while (cursor.moveToNext());
         }
-        cursor.close();
+//        cursor.close();
         return userList;
     }
 
