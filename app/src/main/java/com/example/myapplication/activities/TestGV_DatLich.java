@@ -11,14 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
-import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
-import com.example.myapplication.models.Booking;
-import com.example.myapplication.constants.UserConstants;
-import com.example.myapplication.models.User;
 
-public class MainActivity extends AppCompatActivity {
+public class TestGV_DatLich extends AppCompatActivity {
 
     BookingDAO bookingDAO;
     UserDAO userDAO;
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         button =(Button) findViewById(R.id.sangTabDatLich);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GV_DatLichActivity.class);
+            Intent intent = new Intent(TestGV_DatLich.this, GV_DatLichActivity.class);
             startActivity(intent);
         });
 //        bookingDAO = new BookingDAO(this);

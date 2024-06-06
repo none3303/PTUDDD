@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //init();
+        init();
         getWidth();
         login.setOnClickListener(v -> {
             String reqUsername=editUsername.getText().toString();
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             try{
                 User user=userDAO.getUserByUsername(reqUsername);
                 if(user!=null&&user.getPassword().equals(reqPassword)){
-                    Intent intent = new Intent(this, TestActivity.class);
+                    Intent intent = new Intent(this, TestGV_DatLich.class);
                     intent.putExtra("user",user);
                     startActivity(intent);
                 }
