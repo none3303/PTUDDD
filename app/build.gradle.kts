@@ -16,6 +16,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -42,5 +44,10 @@ dependencies {
     // hinh tron
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // Action button
+    implementation("com.google.android.material:material:1.11.0")
 
+    implementation ("androidx.appcompat:appcompat:1.2.0")
+    implementation ("androidx.vectordrawable:vectordrawable:1.1.0")
+    implementation("com.applandeo:material-calendar-view:1.9.2")
 }
