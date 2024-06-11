@@ -17,6 +17,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.models.Booking;
+import com.example.myapplication.models.User;
 
 import java.util.Calendar;
 import java.util.List;
@@ -46,19 +47,23 @@ public class datlich extends Fragment {
     private Button button1530;
     private Button button1600;
     private Button buttonAdd;
+    private EditText edtLyDo;
+    private static final String ARG_USER = "user";
+    private User user;
 
     public datlich() {
         // Required empty public constructor
     }
 
-    public static datlich newInstance(String param1, String param2) {
+    public static datlich newInstance(User user) {
         datlich fragment = new datlich();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,9 +72,11 @@ public class datlich extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+//        editTextDate.setText();
+        if (getArguments() != null) {
+            user = (User) getArguments().getSerializable(ARG_USER);
+        }
 
-        BookingDAO bookingDAO = new BookingDAO(datlich.this.getContext());
-        List<String> bookings = bookingDAO.getTimeByDate("2023-06-10");
     }
 
     @Override
@@ -83,8 +90,29 @@ public class datlich extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         buttonAdd = view.findViewById(R.id.btnDatlich);
         buttonAdd.setOnClickListener(v -> addLich());
+        calendar = Calendar.getInstance();
+        String today = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR);
         editTextDate = view.findViewById(R.id.date_picker);
+        editTextDate.setHint(today);
         editTextDate.setOnClickListener(v -> showDatePickerDialog());
+        updateButton(view);
+    }
+
+    private void onButtonClicked(Button button) {
+        if (button.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.button_background_unavailable).getConstantState())) {
+            // Nếu button không khả dụng, không làm gì cả
+            return;
+        }
+
+        if (selectedButton != null) {
+            selectedButton.setBackgroundResource(R.drawable.rounded_button);
+        }
+
+        button.setBackgroundResource(R.drawable.button_background_selected);
+        selectedButton = button;
+    }
+
+    private void updateButton(View view) {
         button0800 = view.findViewById(R.id.button0800);
         button0830 = view.findViewById(R.id.button0830);
         button0900 = view.findViewById(R.id.button0900);
@@ -110,22 +138,6 @@ public class datlich extends Fragment {
         button1500.setOnClickListener(v -> onButtonClicked(button1500));
         button1530.setOnClickListener(v -> onButtonClicked(button1530));
         button1600.setOnClickListener(v -> onButtonClicked(button1600));
-
-        updateButtonState(button0800,false);
-    }
-
-    private void onButtonClicked(Button button) {
-        if (button.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.button_background_unavailable).getConstantState())) {
-            // Nếu button không khả dụng, không làm gì cả
-            return;
-        }
-
-        if (selectedButton != null) {
-            selectedButton.setBackgroundResource(R.drawable.rounded_button);
-        }
-
-        button.setBackgroundResource(R.drawable.button_background_selected);
-        selectedButton = button;
     }
 
     private void updateButtonState(Button button, boolean isAvailable) {
@@ -148,11 +160,35 @@ public class datlich extends Fragment {
                 (view, year1, monthOfYear, dayOfMonth) -> {
                     String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
                     editTextDate.setText(selectedDate);
+                    updateAvailableTimes(selectedDate); // Cập nhật trạng thái nút thời gian
                 }, year, month, day);
+
+        // Set minimum date to today
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
         datePickerDialog.show();
     }
 
-    private void addLich(){
+
+    private void updateAvailableTimes(String date) {
+        BookingDAO bookingDAO = new BookingDAO(getContext());
+        List<String> bookedTimes = bookingDAO.getTimeByDate(date);
+
+        updateButtonState(button0800, !bookedTimes.contains("08:00"));
+        updateButtonState(button0830, !bookedTimes.contains("08:30"));
+        updateButtonState(button0900, !bookedTimes.contains("09:00"));
+        updateButtonState(button0930, !bookedTimes.contains("09:30"));
+        updateButtonState(button1000, !bookedTimes.contains("10:00"));
+        updateButtonState(button1030, !bookedTimes.contains("10:30"));
+        updateButtonState(button1100, !bookedTimes.contains("11:00"));
+        updateButtonState(button1400, !bookedTimes.contains("14:00"));
+        updateButtonState(button1430, !bookedTimes.contains("14:30"));
+        updateButtonState(button1500, !bookedTimes.contains("15:00"));
+        updateButtonState(button1530, !bookedTimes.contains("15:30"));
+        updateButtonState(button1600, !bookedTimes.contains("16:00"));
+    }
+
+    private void addLich() {
         if (editTextDate.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), "Vui lòng chọn ngày", Toast.LENGTH_SHORT).show();
             return;
@@ -161,13 +197,25 @@ public class datlich extends Fragment {
             Toast.makeText(getContext(), "Vui lòng chọn thời gian", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // Truy cập EditText edtLyDo từ view của Fragment
+        edtLyDo = getView().findViewById(R.id.edtLyDo);
+
         String date = editTextDate.getText().toString();
         String time = selectedButton.getText().toString();
-        String lich = date + " " + time;
-        Toast.makeText(
-                getContext(),
-                lich,
-                Toast.LENGTH_SHORT
-        ).show();
+
+        Booking booking = new Booking();
+        booking.setUserId(user.getId());
+        booking.setDate(date);
+        booking.setTime(time);
+        booking.setContent(edtLyDo.getText().toString());
+        booking.setStatus(BookingConstants.PENDING);
+        BookingDAO bookingDAO = new BookingDAO(datlich.this.getContext());
+        bookingDAO.addBooking(booking);
+        Toast.makeText(this.getContext(), "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
+        editTextDate.setText("");
+        edtLyDo.setText("");
+        updateAvailableTimes(date);
     }
+
 }

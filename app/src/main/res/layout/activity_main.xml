@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    android:layout_width="match_parent"
+<RelativeLayout  android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout  android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        >
+        android:layout_above="@+id/menusv">
 
         <TextView
-            android:id="@+id/txtTenUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hi, Nguyen Thi Huyen Trang"
-            android:textStyle="bold"
-            android:background="@color/white"
-            android:padding="5dp"/>
+        android:id="@+id/txtTenUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hi, Nguyen Thi Huyen Trang"
+        android:textStyle="bold"
+        android:background="@color/white"
+        android:padding="5dp"/>
 
         <fragment
             android:id="@+id/trangchuFragment"
@@ -32,11 +29,11 @@
             class="com.example.myapplication.fragments.trangchu_sv"
             tools:layout="@layout/fragment_trangchu_sv">
         </fragment>
-
-        <include
-            android:id="@+id/menusv"
-            layout="@layout/menu_sv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
-</ScrollView>
+
+    <include  android:id="@+id/menusv"
+        layout="@layout/menu_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

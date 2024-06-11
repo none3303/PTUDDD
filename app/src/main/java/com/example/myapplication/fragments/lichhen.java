@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.example.myapplication.R;
+import com.example.myapplication.models.User;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -19,15 +21,16 @@ public class lichhen extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private static final String ARG_USER = "user";
+    private User user;
 
     public lichhen() {
         // Cần một constructor công khai rỗng
     }
-    public static lichhen newInstance(String param1, String param2) {
+    public static lichhen newInstance(User user) {
         lichhen fragment = new lichhen();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,8 +39,7 @@ public class lichhen extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            user = (User) getArguments().getSerializable(ARG_USER);
         }
     }
 

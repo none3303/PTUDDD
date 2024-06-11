@@ -127,7 +127,7 @@
                     android:layout_weight="1"
                     android:paddingHorizontal="10dp"
                     android:text="Nội dung"/>
-                <EditText
+                <TextView
                     android:id="@+id/edtNoiDungSV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

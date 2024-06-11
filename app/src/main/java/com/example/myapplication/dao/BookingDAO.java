@@ -1,5 +1,6 @@
 package com.example.myapplication.dao;
 
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import com.example.myapplication.models.Booking;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class BookingDAO {
     private SQLiteDatabase db;
     private MyDatabaseHelper dbHelper;
@@ -21,6 +23,7 @@ public class BookingDAO {
         dbHelper = new MyDatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
     }
+
 
     public void addBooking(Booking booking) {
         ContentValues values = new ContentValues();
@@ -45,5 +48,6 @@ public class BookingDAO {
         }
         return times;
     }
+
 }
 
