@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.constants.BookingConstants;
+import com.example.myapplication.dao.BookingDAO;
+import com.example.myapplication.models.Booking;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class datlich extends Fragment {
 
@@ -62,6 +67,9 @@ public class datlich extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        BookingDAO bookingDAO = new BookingDAO(datlich.this.getContext());
+        List<String> bookings = bookingDAO.getTimeByDate("2023-06-10");
     }
 
     @Override

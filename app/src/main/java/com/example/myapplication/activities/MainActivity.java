@@ -1,6 +1,7 @@
 package com.example.myapplication.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,9 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.myapplication.R;
+import com.example.myapplication.constants.BookingConstants;
+import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.fragments.datlich;
 import com.example.myapplication.fragments.lichhen;
 import com.example.myapplication.fragments.trangchu_sv;
+import com.example.myapplication.models.Booking;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Hiển thị Fragment Trang chủ khi Activity được tạo
         displayTrangChuFragment();
+//        Booking booking1 = new Booking();
+//        booking1.setDate("2023-06-10");
+//        booking1.setTime("08:00");
+//        booking1.setContent("Đặt lịch");
+//        booking1.setStatus(BookingConstants.PENDING);
+//        Booking booking2 = new Booking();
+//        booking2.setDate("2023-06-10");
+//        booking2.setTime("08:30");
+//        booking2.setContent("Đặt lịch");
+//        booking2.setStatus(BookingConstants.PENDING);
+//        BookingDAO bookingDAO = new BookingDAO(this);
+//        bookingDAO.addBooking(booking1);
+//        bookingDAO.addBooking(booking2);
+//        Log.e("TAG", "onCreate: " );
     }
 
 
