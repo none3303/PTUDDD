@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity_GV">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/txtTenUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hi, Nguyen Thi Huyen Trang"
+            android:textStyle="bold"
+            android:background="@color/white"
+            android:padding="5dp"/>
+
+        <fragment
+            android:id="@+id/trangchuFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            class="com.example.myapplication.fragments.trangchu_gv"
+            tools:layout="@layout/fragment_trangchu_gv">
+        </fragment>
+
+        <include
+            android:id="@+id/menugv"
+            layout="@layout/menu_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</FrameLayout>

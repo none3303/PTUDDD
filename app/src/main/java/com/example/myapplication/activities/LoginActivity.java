@@ -44,7 +44,12 @@ public class LoginActivity extends AppCompatActivity {
             try{
                 User user=userDAO.getUserByUsername(reqUsername);
                 if(user!=null&&user.getPassword().equals(reqPassword)){
-                    Intent intent = new Intent(this, TestActivity.class);
+                    Intent intent;
+                    if (user.getRole().equals(UserConstants.ROLE_STUDENT)){
+                        intent = new Intent(this, MainActivity.class);
+                    } else {
+                        intent = new Intent(this, MainActivity_GV.class);
+                    }
                     intent.putExtra("user",user);
                     startActivity(intent);
                 }
@@ -66,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     public void init(){
         getWidth();
         userDAO=new UserDAO(this);
-        // Chay 1 lan xong comment lai
+//        // Chay 1 lan xong comment lai
 //        User tanh=new User();
 //        tanh.setUsername("tanh123");
 //        tanh.setPassword("123");
@@ -79,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 //        tanh.setDateOfBirth("19/09/2003");
 //        tanh.setAddress("Ha Noi");
 //        tanh.setPlaceOfBirth("Ha Noi");
+//        tanh.setRole(UserConstants.ROLE_STUDENT);
 //        userDAO.addUser(tanh);
     }
 }
