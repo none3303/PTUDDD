@@ -48,6 +48,27 @@ public class BookingDAO {
         }
         return times;
     }
+    public List<Booking> getBookingsByDateAndUser(String date, int userId) {
+        List<Booking> bookings = new ArrayList<>();
+        String query = "SELECT * FROM " + BookingConstants.TABLE_BOOKING + " WHERE date = ? AND userId = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{date, String.valueOf(userId)});
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                Booking booking = new Booking();
+                booking.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+                booking.setUserId(cursor.getInt(cursor.getColumnIndexOrThrow("userId")));
+                booking.setDate(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                booking.setTime(cursor.getString(cursor.getColumnIndexOrThrow("time")));
+                booking.setContent(cursor.getString(cursor.getColumnIndexOrThrow("content")));
+                booking.setStatus(cursor.getString(cursor.getColumnIndexOrThrow("status")));
+                bookings.add(booking);
+            }
+        }
+        return bookings;
+    }
+
+
 
 }
 

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".fragments.chitiettheongay">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,13 +35,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingHorizontal="10dp"
-                    android:text="GV cố vấn"/>
+                    android:text="Tên SV"/>
                 <TextView
-                    android:id="@+id/txtTenGv"
+                    android:id="@+id/txtTenSV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:text="Đặng Thị Nhung"/>
+                    android:text="Nguyen Thi Huyen Trang"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -54,9 +53,45 @@
                     android:paddingHorizontal="10dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:text="Mã SV"/>
+                <TextView
+                    android:id="@+id/txtMaSV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="20216010xx"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="10dp"
+                    android:text="Lớp"/>
+                <TextView
+                    android:id="@+id/txtLopSV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="2021DHCNTT01"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="10dp"
                     android:text="Địa điểm"/>
                 <TextView
-                    android:id="@+id/txtDiaDiem"
+                    android:id="@+id/txtDiaDiemSV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
@@ -92,7 +127,7 @@
                     android:paddingHorizontal="10dp"
                     android:text="Nội dung"/>
                 <TextView
-                    android:id="@+id/edtNoiDung"
+                    android:id="@+id/edtNoiDungSV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
@@ -107,4 +142,4 @@
     </LinearLayout>
 
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>
