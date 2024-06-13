@@ -3,6 +3,7 @@ package com.example.myapplication.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgDatLichIcon;
     ImageView imgThongBaoIcon;
     ImageView imgCaNhansv;
+    TextView txtTenUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         imgDatLichIcon = findViewById(R.id.btnDatlichsv);
         imgThongBaoIcon = findViewById(R.id.btnThongBaosv);
         imgCaNhansv = findViewById(R.id.btnCaNhansv);
+        txtTenUser = findViewById(R.id.txtTenUser);
+        txtTenUser.setText("Hi, " + user.getFullName());
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
