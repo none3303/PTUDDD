@@ -1,70 +1,42 @@
 package com.example.myapplication.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.myapplication.R;
-import com.example.myapplication.constants.BookingConstants;
-import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.fragments.PersonalDetail;
 import com.example.myapplication.fragments.datlich;
 import com.example.myapplication.fragments.lichhen;
 import com.example.myapplication.fragments.trangchu_sv;
-import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
-
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView imgTrangChuIcon;
     ImageView imgLichHenIcon;
     ImageView imgDatLichIcon;
+    ImageView imgThongBaoIcon;
     ImageView imgCaNhansv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-
-        // Gọi phương thức để thiết lập widget
+        // Khởi tạo các widget
         WIDGET();
 
-        // Hiển thị Fragment Trang chủ khi Activity được tạo
-//        displayTrangChuFragment();
-//        Booking booking1 = new Booking();
-//        booking1.setDate("12/6/2024");
-//        booking1.setTime("08:00");
-//        booking1.setContent("Đặt lịch");
-//        booking1.setStatus(BookingConstants.PENDING);
-//        Booking booking2 = new Booking();
-//        booking2.setDate("2023-06-10");
-//        booking2.setTime("08:30");
-//        booking2.setContent("Đặt lịch");
-//        booking2.setStatus(BookingConstants.PENDING);
-//        BookingDAO bookingDAO = new BookingDAO(this);
-//        bookingDAO.addBooking(booking1);
-//        bookingDAO.addBooking(booking2);
-//        Log.e("TAG", "onCreate: " );
-
+        // Hiển thị Fragment Trang chủ và đặt trạng thái selected cho biểu tượng Trang chủ
+        User user = (User) getIntent().getSerializableExtra("user");
+        displayTrangChuFragment(user);
+        imgTrangChuIcon.setSelected(true);
     }
-
 
     private void displayFragment(Fragment fragment, User user) {
         if (fragment instanceof PersonalDetail) {
@@ -88,35 +60,42 @@ public class MainActivity extends AppCompatActivity {
         imgTrangChuIcon = findViewById(R.id.btnTrangChusv);
         imgLichHenIcon = findViewById(R.id.btnLicHensv);
         imgDatLichIcon = findViewById(R.id.btnDatlichsv);
+        imgThongBaoIcon = findViewById(R.id.btnThongBaosv);
         imgCaNhansv = findViewById(R.id.btnCaNhansv);
 
-        imgCaNhansv.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayCaNhanFragment(user);
+                resetIconsState();
+                v.setSelected(true);
+                int id = v.getId();
+                if (id == R.id.btnTrangChusv) {
+                    displayTrangChuFragment(user);
+                } else if (id == R.id.btnLicHensv) {
+                    displayLichHenFragment(user);
+                } else if (id == R.id.btnDatlichsv) {
+                    displayDatLichFragment(user);
+                } else if (id == R.id.btnThongBaosv) {
+                    // Thêm phương thức hiển thị fragment cho "Thông báo" tại đây
+                } else if (id == R.id.btnCaNhansv) {
+                    displayCaNhanFragment(user);
+                }
             }
-        });
+        };
 
-        imgTrangChuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayTrangChuFragment(user);
-            }
-        });
+        imgCaNhansv.setOnClickListener(listener);
+        imgTrangChuIcon.setOnClickListener(listener);
+        imgLichHenIcon.setOnClickListener(listener);
+        imgDatLichIcon.setOnClickListener(listener);
+        imgThongBaoIcon.setOnClickListener(listener);
+    }
 
-        imgLichHenIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayLichHenFragment(user);
-            }
-        });
-
-        imgDatLichIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayDatLichFragment(user);
-            }
-        });
+    private void resetIconsState() {
+        imgTrangChuIcon.setSelected(false);
+        imgLichHenIcon.setSelected(false);
+        imgDatLichIcon.setSelected(false);
+        imgThongBaoIcon.setSelected(false);
+        imgCaNhansv.setSelected(false);
     }
 
     private void displayTrangChuFragment(User user) {
@@ -138,6 +117,4 @@ public class MainActivity extends AppCompatActivity {
         Fragment caNhanFragment = PersonalDetail.newInstance(user);
         displayFragment(caNhanFragment, user);
     }
-
-
 }

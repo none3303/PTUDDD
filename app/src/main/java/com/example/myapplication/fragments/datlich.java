@@ -92,6 +92,9 @@ public class datlich extends Fragment {
         buttonAdd.setOnClickListener(v -> addLich());
         calendar = Calendar.getInstance();
         String today = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR);
+
+
+        
         editTextDate = view.findViewById(R.id.date_picker);
         editTextDate.setHint(today);
         editTextDate.setOnClickListener(v -> showDatePickerDialog());
