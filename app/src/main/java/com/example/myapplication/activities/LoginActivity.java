@@ -16,7 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
 import com.example.myapplication.constants.UserConstants;
+import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
+import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -48,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getRole().equals(UserConstants.ROLE_STUDENT)){
                         intent = new Intent(this, MainActivity.class);
                     } else {
-                        intent = new Intent(this, MainActivity_GV.class);
+                        intent = new Intent(this, MainActivity.class);
                     }
                     intent.putExtra("user",user);
                     startActivity(intent);
@@ -71,20 +73,54 @@ public class LoginActivity extends AppCompatActivity {
     public void init(){
         getWidth();
         userDAO=new UserDAO(this);
-//        // Chay 1 lan xong comment lai
-//        User tanh=new User();
-//        tanh.setUsername("tanh123");
-//        tanh.setPassword("123");
-//        tanh.setFullName("Do Tien Anh");
-//        tanh.setIdCard("2021600552");
-//        tanh.setPhone("0865923203");
-//        tanh.setStudentCode("2021600552");
-//        tanh.setGender(UserConstants.GENDER_MALE);
-//        tanh.setEmail("dtienanh1213@gmail.com");
-//        tanh.setDateOfBirth("19/09/2003");
-//        tanh.setAddress("Ha Noi");
-//        tanh.setPlaceOfBirth("Ha Noi");
-//        tanh.setRole(UserConstants.ROLE_STUDENT);
-//        userDAO.addUser(tanh);
+        userDAO.resetData();
+        //sinh vien
+        User tanh=new User();
+        tanh.setUsername("tanh123");
+        tanh.setPassword("123");
+        tanh.setFullName("Do Tien Anh");
+        tanh.setIdCard("2021600552");
+        tanh.setPhone("0865923203");
+        tanh.setStudentCode("2021600552");
+        tanh.setGender(UserConstants.GENDER_MALE);
+        tanh.setEmail("dtienanh1213@gmail.com");
+        tanh.setDateOfBirth("19/09/2003");
+        tanh.setAddress("Ha Noi");
+        tanh.setPlaceOfBirth("Ha Noi");
+        tanh.setRole(UserConstants.ROLE_STUDENT);
+        //giang vien
+        User gv=new User();
+        gv.setUsername("nhungnt");
+        gv.setPassword("123");
+        gv.setFullName("Nguyễn Thị Nhung");
+        gv.setIdCard("2021600552");
+        gv.setPhone("0865923203");
+        gv.setStudentCode("2021600552");
+        gv.setGender(UserConstants.GENDER_FEMALE);
+        gv.setEmail("dtienanh1213@gmail.com");
+        gv.setDateOfBirth("19/09/2003");
+        gv.setAddress("Ha Noi");
+        gv.setPlaceOfBirth("Ha Noi");
+        gv.setRole(UserConstants.ROLE_TEACHER);
+        userDAO.addUser(tanh);
+        userDAO.addUser(gv);
+        //booking
+
+        Booking booking1=new Booking();
+        Booking booking2=new Booking();
+        Booking booking3=new Booking();
+        Booking booking4=new Booking();
+
+        booking1.setRating(5);
+        booking2.setRating(4.5);
+        booking3.setRating(4);
+        booking4.setRating(4);
+        BookingDAO bookingDAO=new BookingDAO(this);
+        bookingDAO.resetData();
+        bookingDAO.addBooking(booking1);
+        bookingDAO.addBooking(booking2);
+        bookingDAO.addBooking(booking3);
+        bookingDAO.addBooking(booking4);
+
     }
 }

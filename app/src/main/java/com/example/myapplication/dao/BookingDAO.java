@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.example.myapplication.constants.BookingConstants;
+import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.database.MyDatabaseHelper;
 import com.example.myapplication.models.Booking;
 
@@ -67,7 +68,9 @@ public class BookingDAO {
         }
         return bookings;
     }
-
+    public void resetData(){
+        dbHelper.deleteAllDataFromTable(BookingConstants.TABLE_BOOKING);
+    }
 
 
 }

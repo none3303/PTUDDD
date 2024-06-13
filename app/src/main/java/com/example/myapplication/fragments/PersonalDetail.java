@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.myapplication.R;
+import com.example.myapplication.constants.UserConstants;
+import com.example.myapplication.dao.UserDAO;
 import com.example.myapplication.models.User;
 
 public class PersonalDetail extends Fragment {
@@ -14,8 +17,8 @@ public class PersonalDetail extends Fragment {
     private static final String ARG_USER = "user";
     private User user;
 
-    private TextView txtFullname, txtStudentIdCard, txtBirth, txtGender, txtPlace, txtIdCard, txtSDT, txtEmail, txtAddress;
-
+    private TextView txtFullname, txtStudentIdCard, txtBirth, txtGender, txtPlace, txtIdCard, txtSDT, txtEmail, txtAddress,txtRating;
+    private ImageView imgStar;
     public PersonalDetail() {
         // Required empty public constructor
     }
@@ -55,6 +58,8 @@ public class PersonalDetail extends Fragment {
         txtSDT = view.findViewById(R.id.txtSDT);
         txtEmail = view.findViewById(R.id.txtEmail);
         txtAddress = view.findViewById(R.id.txtAddress);
+        txtRating=view.findViewById(R.id.txtRating);
+        imgStar=view.findViewById(R.id.imgStar);
     }
 
     private void initUser() {
@@ -68,6 +73,15 @@ public class PersonalDetail extends Fragment {
             txtSDT.setText(user.getPhone());
             txtEmail.setText(user.getEmail());
             txtAddress.setText(user.getAddress());
+            if(user.getRole().equals(UserConstants.ROLE_STUDENT)){
+                txtRating.setText("");
+                imgStar.setVisibility(View.INVISIBLE);
+            }
+            else{
+                UserDAO userDAO=new UserDAO(this.getContext());
+                txtRating.setText(userDAO.calculateAverageRatingForUser()+"");
+                imgStar.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
