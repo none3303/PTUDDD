@@ -16,6 +16,7 @@
 
     <color name="border_color">#61677A</color>
 
-
+    <color name="d_blue">#006FA1</color>
+    <color name="grey">#AAAAAA</color>
 
 </resources>

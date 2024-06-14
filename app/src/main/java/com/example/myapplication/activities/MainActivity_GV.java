@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
+import com.example.myapplication.fragments.GV_DatLichFragment;
 import com.example.myapplication.fragments.PersonalDetail;
 import com.example.myapplication.fragments.trangchu_gv;
 import com.example.myapplication.models.User;
@@ -21,6 +22,7 @@ public class MainActivity_GV extends AppCompatActivity {
 
     private ImageView imgTrangChuIcon;
     private ImageView imgCaNhanIcon;
+    private ImageView imgDatLichGV;
     private TextView txtTenUser;
     private Button btnLogout;
 
@@ -37,6 +39,7 @@ public class MainActivity_GV extends AppCompatActivity {
     private void WIDGET() {
         User user = (User) getIntent().getSerializableExtra("user");
         imgTrangChuIcon = findViewById(R.id.btnTrangChuGv);
+        imgDatLichGV = findViewById(R.id.btnDatlichGv);
         imgCaNhanIcon = findViewById(R.id.btnCaNhan);
         txtTenUser = findViewById(R.id.txtTenUsergv);
         btnLogout = findViewById(R.id.btnLogoutgv);
@@ -61,11 +64,19 @@ public class MainActivity_GV extends AppCompatActivity {
                     displayTrangChuFragment(user);
                 }else if (id == R.id.btnCaNhan) {
                     displayCaNhanFragment(user);
+                }else if (id == R.id.btnDatlichGv) {
+                    displayDatLichFragment(user);
                 }
             }
         };
         imgTrangChuIcon.setOnClickListener(listener);
         imgCaNhanIcon.setOnClickListener(listener);
+        imgDatLichGV.setOnClickListener(listener);
+    }
+
+    private void displayDatLichFragment(User user) {
+        Fragment datLichFragment = GV_DatLichFragment.newInstance(user);
+        displayFragment(datLichFragment);
     }
 
     private void resetIconsState() {
@@ -88,4 +99,5 @@ public class MainActivity_GV extends AppCompatActivity {
         transaction.replace(R.id.trangchuFragment, fragment);
         transaction.commit();
     }
+
 }
