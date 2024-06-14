@@ -38,13 +38,18 @@ public class Gv_ChapNhanTab extends GV_BaseBookingTab{
     @Override
     protected boolean handleContextItemSelected(MenuItem item, Booking selectedBooking) {
         if(item.getItemId() == R.id.menu_complete){
-            //Dẫn tới màn Đánh giá
+            updateBookingStatus(selectedBooking, BookingConstants.FINISH);
             return true;
         }else if(item.getItemId() == R.id.menu_fail){
-            //
+            updateBookingStatus(selectedBooking, BookingConstants.FAIL);
             return true;
         }else{
             return false;
         }
+    }
+    private void updateBookingStatus(Booking booking, String status) {
+        booking.setStatus(status);
+        bookingDAO.updateBooking(booking);
+        setupListView();
     }
 }
