@@ -153,7 +153,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
             Button btnFail = dialog.findViewById(R.id.btnFail);
             btnComplete.setOnClickListener(v -> {
                 // Handle complete action
-                booking.setStatus(BookingConstants.FINISH);
+                booking.setStatus(BookingConstants.SUCCESS);
                 bookingDAO.updateBooking(booking);
                 filteredBooks.remove(booking);
                 notifyDataSetChanged();
