@@ -30,7 +30,6 @@ public abstract class GV_BaseBookingTab extends Fragment {
     protected TextView txt_null;
     protected ListView listView;
     protected EditText searchEditText;
-    protected Button searchButton;
     protected GV_DatLichListAdapter adapter;
     protected BookingDAO bookingDAO;
 
@@ -62,9 +61,9 @@ public abstract class GV_BaseBookingTab extends Fragment {
         txt_null = view.findViewById(R.id.txt_null);
     }
 
-    void setupListView() {
+    public void setupListView() {
         List<Booking> bookings = getBookings();
-        adapter = new GV_DatLichListAdapter(requireParentFragment(), bookings);  // Pass the parent fragment
+        adapter = new GV_DatLichListAdapter((GV_DatLichFragment) requireParentFragment(), bookings);  // Pass the parent fragment
         listView.setAdapter(adapter);
         registerForContextMenu(listView);
     }
@@ -112,4 +111,9 @@ public abstract class GV_BaseBookingTab extends Fragment {
     }
 
     protected abstract boolean handleContextItemSelected(MenuItem item, Booking selectedBooking);
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupListView();
+    }
 }

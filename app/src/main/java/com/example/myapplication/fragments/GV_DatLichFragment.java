@@ -25,6 +25,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class GV_DatLichFragment extends Fragment {
     User user;
+    GV_DatLichAdapter adapter;
     private static final String ARG_USER = "user";
 
     public static GV_DatLichFragment newInstance(User user) {
@@ -46,7 +47,7 @@ public class GV_DatLichFragment extends Fragment {
         });
 
         ViewPager viewPager = view.findViewById(R.id.viewPager);
-        GV_DatLichAdapter adapter = new GV_DatLichAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter = new GV_DatLichAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);

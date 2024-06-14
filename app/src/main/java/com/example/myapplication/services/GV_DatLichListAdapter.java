@@ -3,7 +3,6 @@ package com.example.myapplication.services;
 import com.example.myapplication.R;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -14,12 +13,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.activities.GV_DatLichActivity;
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
@@ -140,6 +136,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
                 // Update status to ACCEPT
                 booking.setStatus(BookingConstants.ACCEPT);
                 bookingDAO.updateBooking(booking);
+                filteredBooks.remove(booking);
                 notifyDataSetChanged();
                 dialog.dismiss();
             });
@@ -147,6 +144,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
                 // Update status to REJECT
                 booking.setStatus(BookingConstants.REJECT);
                 bookingDAO.updateBooking(booking);
+                filteredBooks.remove(booking);
                 notifyDataSetChanged();
                 dialog.dismiss();
             });
@@ -175,6 +173,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
                 // Update status to PENDING
                 booking.setStatus(BookingConstants.PENDING);
                 bookingDAO.updateBooking(booking);
+                filteredBooks.remove(booking);
                 notifyDataSetChanged();
                 dialog.dismiss();
             });
