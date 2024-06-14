@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     public void init(){
         getWidth();
         userDAO=new UserDAO(this);
-//        // Chay 1 lan xong comment lai
+        // Chay 1 lan xong comment lai
 //        User tanh=new User();
 //        tanh.setUsername("tanh1234");
 //        tanh.setPassword("123");

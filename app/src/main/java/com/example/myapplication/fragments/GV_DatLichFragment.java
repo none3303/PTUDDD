@@ -19,11 +19,21 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.R;
+import com.example.myapplication.models.User;
 import com.example.myapplication.services.GV_DatLichAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class GV_DatLichFragment extends Fragment {
+    User user;
+    private static final String ARG_USER = "user";
 
+    public static GV_DatLichFragment newInstance(User user) {
+        GV_DatLichFragment fragment = new GV_DatLichFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_USER, user);
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

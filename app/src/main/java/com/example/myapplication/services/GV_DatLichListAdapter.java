@@ -51,7 +51,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
         tvNumber.setText(String.valueOf(position + 1));
         //ivIcon.setImageResource(user.getIconResId());
         UserDAO userDAO = new UserDAO(getContext());
-        User user = userDAO.getUserByStudentId(String.valueOf(booking.getUserId()));
+        User user = userDAO.getUserById((booking.getUserId()));
         tvName.setText(user.getFullName());
 
         btnView.setOnClickListener(new View.OnClickListener() {

@@ -161,4 +161,7 @@ public class UserDAO {
         return  Math.round(averageRating * 10.0) / 10.0f;
     }
 
+    public void close() {
+        this.dbHelper.close();
+    }
 }

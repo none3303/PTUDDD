@@ -5,11 +5,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-<<<<<<< HEAD
-=======
+
 import android.util.Log;
 import android.widget.Toast;
->>>>>>> origin/ngdat
+
 
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.database.MyDatabaseHelper;
