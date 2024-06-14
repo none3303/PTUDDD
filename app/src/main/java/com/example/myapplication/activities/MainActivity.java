@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.myapplication.R;
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
+import com.example.myapplication.fragments.NotificationsFragment;
 import com.example.myapplication.fragments.PersonalDetail;
 import com.example.myapplication.fragments.datlich;
 import com.example.myapplication.fragments.lichhen;
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.btnDatlichsv) {
                     displayDatLichFragment(user);
                 } else if (id == R.id.btnThongBaosv) {
-                    // Thêm phương thức hiển thị fragment cho "Thông báo" tại đây
+                    displayThongBaoFragment(user);
                 } else if (id == R.id.btnCaNhansv) {
                     displayCaNhanFragment(user);
                 }
@@ -145,5 +146,9 @@ public class MainActivity extends AppCompatActivity {
     private void displayCaNhanFragment(User user) {
         Fragment caNhanFragment = PersonalDetail.newInstance(user);
         displayFragment(caNhanFragment, user);
+    }
+    private void displayThongBaoFragment(User user) {
+        Fragment thongBaoFragment = NotificationsFragment.newInstance(user);
+        displayFragment(thongBaoFragment, user);
     }
 }
