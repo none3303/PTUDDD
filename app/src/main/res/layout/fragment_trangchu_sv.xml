@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/bg_notifications2"
@@ -33,6 +34,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/yellow"/>
                 <TextView
+                    android:id="@+id/tv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -64,25 +66,9 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
-                    <TextView
-                        android:id="@+id/txtXemChiTiet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:text="Xem chi tiết"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/blue"/>
                 </TableRow>
             </LinearLayout>
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-20dp"
-                android:src="@drawable/option_icon"/>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="match_parent"

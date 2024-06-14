@@ -1,7 +1,9 @@
 package com.example.myapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,20 +13,24 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
+import com.example.myapplication.constants.BookingConstants;
+import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.fragments.PersonalDetail;
 import com.example.myapplication.fragments.datlich;
 import com.example.myapplication.fragments.lichhen;
 import com.example.myapplication.fragments.trangchu_sv;
+import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imgTrangChuIcon;
-    ImageView imgLichHenIcon;
-    ImageView imgDatLichIcon;
-    ImageView imgThongBaoIcon;
-    ImageView imgCaNhansv;
-    TextView txtTenUser;
+    private ImageView imgTrangChuIcon;
+    private ImageView imgLichHenIcon;
+    private ImageView imgDatLichIcon;
+    private ImageView imgThongBaoIcon;
+    private ImageView imgCaNhansv;
+    private TextView txtTenUser;
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         User user = (User) getIntent().getSerializableExtra("user");
         displayTrangChuFragment(user);
         imgTrangChuIcon.setSelected(true);
+
+//        Booking booking = new Booking();
+//        booking.setTime("09:00");
+//        booking.setDate("12/6/2024");
+//        booking.setUserId(1);
+//        booking.setContent("test");
+//        booking.setStatus(BookingConstants.ACCEPT);
+//        BookingDAO bookingDAO = new BookingDAO(this);
+//        bookingDAO.addBooking(booking);
     }
 
     private void displayFragment(Fragment fragment, User user) {
@@ -65,7 +80,17 @@ public class MainActivity extends AppCompatActivity {
         imgThongBaoIcon = findViewById(R.id.btnThongBaosv);
         imgCaNhansv = findViewById(R.id.btnCaNhansv);
         txtTenUser = findViewById(R.id.txtTenUser);
+        btnLogout = findViewById(R.id.btnLogout);
         txtTenUser.setText("Hi, " + user.getFullName());
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
