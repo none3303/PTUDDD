@@ -13,18 +13,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
-            android:name=".activities.GV_DatLichActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.TestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.TestGV_DatLich"
-            android:exported="false" />
-        <activity
-=======
->>>>>>> origin/main
+
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">

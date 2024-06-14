@@ -1,32 +1,18 @@
 package com.example.myapplication.dao;
 
-<<<<<<< HEAD
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.myapplication.constants.BookingConstants;
-=======
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
-
-import com.example.myapplication.constants.BookingConstants;
-import com.example.myapplication.constants.UserConstants;
->>>>>>> origin/main
 import com.example.myapplication.database.MyDatabaseHelper;
 import com.example.myapplication.models.Booking;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/main
 
 public class BookingDAO {
     private SQLiteDatabase db;
@@ -37,18 +23,7 @@ public class BookingDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-<<<<<<< HEAD
-    public void addBooking(Booking booking) {
-        ContentValues values = new ContentValues();
-        values.put(BookingConstants.DATE, booking.getDate());
-        values.put(BookingConstants.TIME, booking.getTime());
-        values.put(BookingConstants.CONTENT, booking.getContent());
-        values.put(BookingConstants.STATUS, booking.getStatus());
-        values.put(BookingConstants.RATING, booking.getRating());
-        values.put(BookingConstants.USER_ID, booking.getUserId());
-        db.insert(BookingConstants.TABLE_BOOKING, null, values);
-        db.close();
-    }
+
 
     public Booking getBookingById(int id) {
         Cursor cursor = db.query(BookingConstants.TABLE_BOOKING, new String[]{"id", BookingConstants.DATE, BookingConstants.TIME, BookingConstants.CONTENT, BookingConstants.STATUS, BookingConstants.RATING},
@@ -146,7 +121,7 @@ public class BookingDAO {
     public void close() {
         dbHelper.close();
     }
-=======
+
 
     public void addBooking(Booking booking) {
         ContentValues values = new ContentValues();
@@ -195,6 +170,6 @@ public class BookingDAO {
     }
 
 
->>>>>>> origin/main
+
 }
 

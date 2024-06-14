@@ -5,23 +5,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-<<<<<<< HEAD
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.TestGV_DatLich">
-
-
-    <Button
-        android:id="@+id/sangTabDatLich"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="19dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-=======
     tools:context=".activities.MainActivity">
 
     <LinearLayout  android:layout_width="match_parent"
@@ -54,4 +37,4 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
->>>>>>> origin/main
+

@@ -47,16 +47,13 @@ public class LoginActivity extends AppCompatActivity {
             try{
                 User user=userDAO.getUserByUsername(reqUsername);
                 if(user!=null&&user.getPassword().equals(reqPassword)){
-<<<<<<< HEAD
-                    Intent intent = new Intent(this, TestGV_DatLich.class);
-=======
+
                     Intent intent;
                     if (user.getRole().equals(UserConstants.ROLE_STUDENT)){
                         intent = new Intent(this, MainActivity.class);
                     } else {
                         intent = new Intent(this, MainActivity.class);
                     }
->>>>>>> origin/main
                     intent.putExtra("user",user);
                     startActivity(intent);
                 }

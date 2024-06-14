@@ -30,11 +30,11 @@ public class TestGV_DatLich extends AppCompatActivity {
             return insets;
         });
 
-        button =(Button) findViewById(R.id.sangTabDatLich);
-        button.setOnClickListener(v -> {
-            Intent intent = new Intent(TestGV_DatLich.this, GV_DatLichActivity.class);
-            startActivity(intent);
-        });
+//        button =(Button) findViewById(R.id.sangTabDatLich);
+//        button.setOnClickListener(v -> {
+//            Intent intent = new Intent(TestGV_DatLich.this, GV_DatLichActivity.class);
+//            startActivity(intent);
+//        });
 //        bookingDAO = new BookingDAO(this);
 //        bookingDAO.addBooking(new Booking(1,"12","12","12", BookingConstants.ACCEPT,4,1));
 //        bookingDAO.addBooking(new Booking(2,"12","12","12", BookingConstants.REJECT,4,1));
