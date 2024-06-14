@@ -2,8 +2,7 @@ package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
-import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,13 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
-import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.constants.UserConstants;
-import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
-import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
-import com.google.android.material.textfield.TextInputEditText;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -75,29 +71,19 @@ public class LoginActivity extends AppCompatActivity {
         getWidth();
         userDAO=new UserDAO(this);
         // Chay 1 lan xong comment lai
-//        User tan=new User();
-//        tan.setUsername("tank123");
-//        tan.setPassword("123");
-//        tan.setFullName("Do Tien Anh");
-//        tan.setIdCard("2021600552");
-//        tan.setPhone("0865923203");
-//        tan.setStudentCode("2021600552");
-//        tan.setGender(UserConstants.GENDER_MALE);
-//        tan.setEmail("dtienanh1213@gmail.com");
-//        tan.setDateOfBirth("19/09/2003");
-//        tan.setAddress("Ha Noi");
-//        tan.setPlaceOfBirth("Ha Noi");
-//        tan.setRole(UserConstants.ROLE_STUDENT);
-//        userDAO.addUser(tan);
-//        BookingDAO booking = new BookingDAO(this);
-//        Booking bk = new Booking();
-//        bk.setId(20);
-//        bk.setDate("16-06-2024");
-//        bk.setTime("10:30");
-//        bk.setContent("Lấy học bổng");
-//        bk.setStatus(BookingConstants.ACCEPT);
-//        bk.setUserId(2021600552);
-//        booking.addBooking(bk);
-
+        User tanh=new User();
+        tanh.setUsername("nhungnt");
+        tanh.setPassword("123");
+        tanh.setFullName("Dang Thi Nhung");
+        tanh.setIdCard("2021600552");
+        tanh.setPhone("0865923203");
+        tanh.setStudentCode("2021600552");
+        tanh.setGender(UserConstants.GENDER_FEMALE);
+        tanh.setEmail("dtienanh1213@gmail.com");
+        tanh.setDateOfBirth("19/09/2003");
+        tanh.setAddress("Ha Noi");
+        tanh.setPlaceOfBirth("Ha Noi");
+        tanh.setRole(UserConstants.ROLE_TEACHER);
+        userDAO.addUser(tanh);
     }
 }

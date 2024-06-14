@@ -50,4 +50,5 @@ dependencies {
     implementation ("androidx.appcompat:appcompat:1.2.0")
     implementation ("androidx.vectordrawable:vectordrawable:1.1.0")
     implementation("com.applandeo:material-calendar-view:1.9.2")
+    implementation ("com.opencsv:opencsv:4.6")
 }
