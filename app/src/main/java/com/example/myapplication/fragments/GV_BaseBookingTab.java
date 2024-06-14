@@ -41,7 +41,7 @@ public abstract class GV_BaseBookingTab extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bookingDAO = new BookingDAO(getContext());
+        bookingDAO = new BookingDAO(requireContext()); // Use requireContext() for non-nullable context
     }
 
     @Override
@@ -64,7 +64,7 @@ public abstract class GV_BaseBookingTab extends Fragment {
 
     void setupListView() {
         List<Booking> bookings = getBookings();
-        adapter = new GV_DatLichListAdapter(getActivity(), bookings);
+        adapter = new GV_DatLichListAdapter(requireParentFragment(), bookings);  // Pass the parent fragment
         listView.setAdapter(adapter);
         registerForContextMenu(listView);
     }

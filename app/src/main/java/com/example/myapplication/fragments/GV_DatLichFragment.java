@@ -78,7 +78,10 @@ public class GV_DatLichFragment extends Fragment {
 
         return view;
     }
-
+    public int getCurrentTabPosition() {
+        TabLayout tabLayout = getView().findViewById(R.id.tabLayout);
+        return tabLayout.getSelectedTabPosition();
+    }
     public void setColor(TabLayout tabLayout, int position, String text, boolean isActive) {
         SpannableString spannableString = new SpannableString(text);
         if (isActive) {
