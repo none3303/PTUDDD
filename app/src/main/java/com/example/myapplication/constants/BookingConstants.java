@@ -21,6 +21,6 @@ public class BookingConstants {
     public static final String REJECT="Từ chối";
     public static final String FINISH = "Hoàn Thành";
     public static final String FAIL = "Thất Bại";
-    public static final String SUCCESS = "Thàng công";
+    public static final String SUCCESS = "Thành công";
 
 }

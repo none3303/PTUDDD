@@ -1,14 +1,22 @@
 package com.example.myapplication.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -27,6 +35,7 @@ public class trangchu_sv extends Fragment {
     private User user;
     private TextView txtThoiGian,tv1,txtDiaDiem,txtDanhGia;
     private CardView cardView;
+    private Button btnDatLich;
 
     public trangchu_sv() {
         // Required empty public constructor
@@ -49,6 +58,12 @@ public class trangchu_sv extends Fragment {
     }
 
     @Override
+    public void onStart() {
+//        checkAndShowRatingDialog();
+        super.onStart();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trangchu_sv, container, false);
@@ -59,7 +74,12 @@ public class trangchu_sv extends Fragment {
         txtDanhGia=view.findViewById(R.id.txtDanhGia);
         getBookingToday();
         setTeacher();
+        Wigget();
         return view;
+    }
+
+    private void Wigget() {
+
     }
 
     private void getBookingToday() {
@@ -101,8 +121,7 @@ public class trangchu_sv extends Fragment {
 
             for (User user : users) {
                 if (user.getRole().equals(UserConstants.ROLE_TEACHER)) {
-                    double averageRating = userDAO.calculateAverageRatingForUser();
-                    Log.e("setTeacher", "Average rating for user " + user.getUsername() + ": " + averageRating);
+                    double averageRating = userDAO.calculateAverageRatingForUser1();
                     txtDanhGia.setText(String.valueOf(averageRating));
                     break; // If you only want to display the first teacher found
                 }
@@ -111,6 +130,4 @@ public class trangchu_sv extends Fragment {
             Log.e("setTeacher", "Error setting teacher", e);
         }
     }
-
-
 }
