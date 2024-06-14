@@ -1,49 +1,32 @@
 package com.example.myapplication.fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.myapplication.R;
+import com.example.myapplication.constants.UserConstants;
+import com.example.myapplication.dao.UserDAO;
+import com.example.myapplication.models.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PersonalDetail#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PersonalDetail extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_USER = "user";
+    private User user;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private TextView txtFullname, txtStudentIdCard, txtBirth, txtGender, txtPlace, txtIdCard, txtSDT, txtEmail, txtAddress,txtRating;
+    private ImageView imgStar;
     public PersonalDetail() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PersonalDetail.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PersonalDetail newInstance(String param1, String param2) {
+    public static PersonalDetail newInstance(User user) {
         PersonalDetail fragment = new PersonalDetail();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,15 +35,53 @@ public class PersonalDetail extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            user = (User) getArguments().getSerializable(ARG_USER);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal_detail, container, false);
+        initViews(view);
+        initUser();
+        return view;
+    }
+
+    private void initViews(View view) {
+        txtFullname = view.findViewById(R.id.txtFullname);
+        txtStudentIdCard = view.findViewById(R.id.txtStudentIdCard);
+        txtBirth = view.findViewById(R.id.txtBirth);
+        txtGender = view.findViewById(R.id.txtGender);
+        txtPlace = view.findViewById(R.id.txtPlace);
+        txtIdCard = view.findViewById(R.id.txtIdCard);
+        txtSDT = view.findViewById(R.id.txtSDT);
+        txtEmail = view.findViewById(R.id.txtEmail);
+        txtAddress = view.findViewById(R.id.txtAddress);
+        txtRating=view.findViewById(R.id.txtRating);
+        imgStar=view.findViewById(R.id.imgStar);
+    }
+
+    private void initUser() {
+        if (user != null) {
+            txtFullname.setText(user.getFullName());
+            txtStudentIdCard.setText(user.getStudentCode());
+            txtBirth.setText(user.getDateOfBirth());
+            txtGender.setText(user.getGender());
+            txtPlace.setText(user.getPlaceOfBirth());
+            txtIdCard.setText(user.getIdCard());
+            txtSDT.setText(user.getPhone());
+            txtEmail.setText(user.getEmail());
+            txtAddress.setText(user.getAddress());
+            if(user.getRole().equals(UserConstants.ROLE_STUDENT)){
+                txtRating.setText("");
+                imgStar.setVisibility(View.INVISIBLE);
+            }
+            else{
+                UserDAO userDAO=new UserDAO(this.getContext());
+                txtRating.setText(userDAO.calculateAverageRatingForUser()+"");
+                imgStar.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.database.MyDatabaseHelper;
 import com.example.myapplication.models.User;
@@ -160,6 +161,20 @@ public class UserDAO {
         }
 //        cursor.close();
         return userList;
+    }
+    public float calculateAverageRatingForUser() {
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        String query = "SELECT AVG(" + BookingConstants.RATING + ") as average_rating " +
+                "FROM " + BookingConstants.TABLE_BOOKING ;
+        Cursor cursor = db.rawQuery(query, null);
+        float averageRating = 0;
+        if (cursor.moveToFirst()) {
+            averageRating = cursor.getFloat(cursor.getColumnIndexOrThrow("average_rating"));
+        }
+        return  Math.round(averageRating * 10.0) / 10.0f;
+    }
+    public void resetData(){
+        dbHelper.deleteAllDataFromTable(UserConstants.TABLE_USER);
     }
 
     public void close() {

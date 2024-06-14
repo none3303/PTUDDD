@@ -65,10 +65,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ BookingConstants.TABLE_BOOKING);
         onCreate(db);
     }
+<<<<<<< HEAD
     public synchronized void close() {
         if (instance != null) {
             super.close();
             instance = null;
         }
+=======
+
+    public void deleteAllDataFromTable(String tableName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(tableName, null, null);
+>>>>>>> origin/main
     }
 }

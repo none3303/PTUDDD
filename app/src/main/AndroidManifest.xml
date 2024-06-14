@@ -13,6 +13,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".activities.GV_DatLichActivity"
             android:exported="false" />
         <activity
@@ -22,7 +23,10 @@
             android:name=".activities.TestGV_DatLich"
             android:exported="false" />
         <activity
+=======
+>>>>>>> origin/main
             android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +34,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+        android:name=".activities.MainActivity_GV"
+            android:windowSoftInputMode="adjustResize"
+        android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
     </application>
 
 </manifest>
