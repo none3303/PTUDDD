@@ -12,6 +12,7 @@ public class BookingConstants {
     public static final String STATUS="status";
 
     public static final String RATING="rating";
+    public static final String USER_ID="userId";
 
     //status constant
 

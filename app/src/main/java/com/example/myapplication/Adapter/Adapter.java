@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Booking;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
@@ -39,6 +40,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         return bookings.size();
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+
         private TextView time;
         private TextView nameGV;
         private TextView content;

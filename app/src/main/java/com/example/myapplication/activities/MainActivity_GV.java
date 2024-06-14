@@ -1,70 +1,102 @@
 package com.example.myapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.myapplication.R;
+import com.example.myapplication.fragments.GV_DatLichFragment;
+import com.example.myapplication.fragments.PersonalDetail;
+import com.example.myapplication.fragments.trangchu_gv;
+import com.example.myapplication.models.User;
 
 public class MainActivity_GV extends AppCompatActivity {
 
     private ImageView imgTrangChuIcon;
-    private Fragment fragment;
+    private ImageView imgCaNhanIcon;
+    private ImageView imgDatLichGV;
+    private TextView txtTenUser;
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_gv);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
+        User user = (User) getIntent().getSerializableExtra("user");
         WIDGET();
+        displayTrangChuFragment(user);
+        imgTrangChuIcon.setSelected(true);
     }
 
     private void WIDGET() {
+        User user = (User) getIntent().getSerializableExtra("user");
         imgTrangChuIcon = findViewById(R.id.btnTrangChuGv);
+        imgDatLichGV = findViewById(R.id.btnDatlichGv);
+        imgCaNhanIcon = findViewById(R.id.btnCaNhan);
+        txtTenUser = findViewById(R.id.txtTenUsergv);
+        btnLogout = findViewById(R.id.btnLogoutgv);
+        txtTenUser.setText("Hi, " + user.getFullName());
 
-        // Thiết lập sự kiện click cho ImageView Trang chủ
-        imgTrangChuIcon.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Hiển thị Fragment Trang chủ khi ImageView Trang chủ được nhấp
-                displayTrangChuFragment();
+                Intent intent = new Intent(MainActivity_GV.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetIconsState();
+                v.setSelected(true);
+                int id = v.getId();
+                if (id == R.id.btnTrangChuGv) {
+                    displayTrangChuFragment(user);
+                }else if (id == R.id.btnCaNhan) {
+                    displayCaNhanFragment(user);
+                }else if (id == R.id.btnDatlichGv) {
+                    displayDatLichFragment(user);
+                }
+            }
+        };
+        imgTrangChuIcon.setOnClickListener(listener);
+        imgCaNhanIcon.setOnClickListener(listener);
+        imgDatLichGV.setOnClickListener(listener);
     }
 
-    private void displayTrangChuFragment() {
-        // Tạo mới Fragment Trang chủ
-        Fragment trangChuFragment = new Fragment(); // Thay đổi Fragment này theo Fragment của bạn
+    private void displayDatLichFragment(User user) {
+        Fragment datLichFragment = GV_DatLichFragment.newInstance(user);
+        displayFragment(datLichFragment);
+    }
 
-        // Hiển thị Fragment Trang chủ
+    private void resetIconsState() {
+        imgTrangChuIcon.setSelected(false);
+        imgCaNhanIcon.setSelected(false);
+    }
+
+    private void displayTrangChuFragment(User user) {
+        Fragment trangChuFragment = trangchu_gv.newInstance(user);
         displayFragment(trangChuFragment);
+    }
+    private void displayCaNhanFragment(User user) {
+        Fragment caNhanFragment = PersonalDetail.newInstance(user);
+        displayFragment(caNhanFragment);
     }
 
     private void displayFragment(Fragment fragment) {
-        // Lấy FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Bắt đầu giao dịch Fragment
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-        // Thay thế Fragment hiện tại bằng Fragment mới
-        transaction.replace(R.id.fragment_trangchu_gv, fragment);
-
-        // Commit giao dịch
+        transaction.replace(R.id.trangchuFragment, fragment);
         transaction.commit();
     }
 }

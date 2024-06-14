@@ -5,22 +5,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.CalendarView;
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.example.myapplication.Adapter.Adapter;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class lichhen extends Fragment {
 
@@ -33,6 +34,7 @@ public class lichhen extends Fragment {
     private User user;
     private RecyclerView recyclerView;
     private Adapter itemAdapter;
+    private TextView txtThang,txtTongSo;
 
     public lichhen() {
         // Cần một constructor công khai rỗng
@@ -80,11 +82,48 @@ public class lichhen extends Fragment {
             recyclerView.setAdapter(itemAdapter);
         });
 
-        // Khởi tạo sự kiện ban đầu nếu cần
-        List<EventDay> events = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.add_icon));
+        BookingDAO bookingDAO = new BookingDAO(getContext());
+        ArrayList<String> bookings = (ArrayList<String>) bookingDAO.getDistinctBookingDatesFromMonth(user.getId());
+        ArrayList<String> bookings1 = (ArrayList<String>) bookingDAO.getDistinctBookingDatesFromMonth4(user.getId());
+        txtTongSo=view.findViewById(R.id.txtTongSo);
+        txtTongSo.setText("Tổng số lịch hẹn: " + bookings1.size());
+        txtThang=view.findViewById(R.id.txtThang);
+
+        ArrayList<EventDay> events = new ArrayList<>();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar today = Calendar.getInstance();
+        txtThang.setText("Tháng: " + (today.get(Calendar.MONTH) + 1));
+        String todayStr = sdf.format(today.getTime());
+
+        for (String bookingDate : bookings) {
+            try {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(sdf.parse(bookingDate));
+
+                // Định dạng ngày đặt chỗ
+                String bookingDateStr = sdf.format(calendar.getTime());
+
+                // So sánh ngày đặt chỗ với ngày hiện tại
+                if (bookingDateStr.equals(todayStr)) {
+                    // Ngày đã qua
+                    events.add(new EventDay(calendar, R.drawable.ic_chuthich_red));
+                } else if (calendar.before(today)) {
+                    // Ngày hôm nay
+                    events.add(new EventDay(calendar, R.drawable.ic_chuthich_gray));
+                } else {
+                    // Ngày chưa đến
+                    events.add(new EventDay(calendar, R.drawable.ic_chuthich_yellow));
+                }
+
+                Log.d("EventDate", "EventDate: " + sdf.format(calendar.getTime())); // Log ngày được thêm vào sự kiện
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         calendarView.setEvents(events);
+
 
         return view;
     }
