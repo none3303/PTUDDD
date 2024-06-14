@@ -2,8 +2,7 @@ package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
-import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +17,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.dao.UserDAO;
 import com.example.myapplication.models.User;
-import com.google.android.material.textfield.TextInputEditText;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -72,19 +71,19 @@ public class LoginActivity extends AppCompatActivity {
         getWidth();
         userDAO=new UserDAO(this);
         // Chay 1 lan xong comment lai
-//        User tanh=new User();
-//        tanh.setUsername("tanh1234");
-//        tanh.setPassword("123");
-//        tanh.setFullName("Dang Thi Nhung");
-//        tanh.setIdCard("2021600552");
-//        tanh.setPhone("0865923203");
-//        tanh.setStudentCode("2021600552");
-//        tanh.setGender(UserConstants.GENDER_FEMALE);
-//        tanh.setEmail("dtienanh1213@gmail.com");
-//        tanh.setDateOfBirth("19/09/2003");
-//        tanh.setAddress("Ha Noi");
-//        tanh.setPlaceOfBirth("Ha Noi");
-//        tanh.setRole(UserConstants.ROLE_TEACHER);
-//        userDAO.addUser(tanh);
+        User tanh=new User();
+        tanh.setUsername("nhungnt");
+        tanh.setPassword("123");
+        tanh.setFullName("Dang Thi Nhung");
+        tanh.setIdCard("2021600552");
+        tanh.setPhone("0865923203");
+        tanh.setStudentCode("2021600552");
+        tanh.setGender(UserConstants.GENDER_FEMALE);
+        tanh.setEmail("dtienanh1213@gmail.com");
+        tanh.setDateOfBirth("19/09/2003");
+        tanh.setAddress("Ha Noi");
+        tanh.setPlaceOfBirth("Ha Noi");
+        tanh.setRole(UserConstants.ROLE_TEACHER);
+        userDAO.addUser(tanh);
     }
 }
