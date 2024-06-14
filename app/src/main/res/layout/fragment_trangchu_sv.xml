@@ -142,12 +142,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_start" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnDatLich"
-                        android:layout_width="100dp"
-                        android:background="@color/jade_green"
-                        android:layout_height="wrap_content"
-                        android:text="Đặt lịch"/>
+<!--                    <androidx.appcompat.widget.AppCompatButton-->
+<!--                        android:id="@+id/btnDatLich1"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:background="@color/jade_green"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Đặt lịch"/>-->
                 </LinearLayout>
             </TableLayout>
         </LinearLayout>

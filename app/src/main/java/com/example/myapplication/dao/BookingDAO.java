@@ -42,17 +42,24 @@ public class BookingDAO {
     }
     public List<String> getTimeByDate(String date) {
         List<String> times = new ArrayList<>();
-        String query = "SELECT DISTINCT time FROM " + BookingConstants.TABLE_BOOKING + " WHERE date = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{date});
+        String query = "SELECT DISTINCT time FROM " + BookingConstants.TABLE_BOOKING + " WHERE date = ? AND status = ?";
+
+
+        Cursor cursor = db.rawQuery(query, new String[]{date, BookingConstants.ACCEPT});
 
         if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String time = cursor.getString(cursor.getColumnIndexOrThrow("time"));
-                times.add(time);
+            try {
+                while (cursor.moveToNext()) {
+                    String time = cursor.getString(cursor.getColumnIndexOrThrow("time"));
+                    times.add(time);
+                }
+            } finally {
+
             }
         }
         return times;
     }
+
     public List<Booking> getBookingsByDateAndUser(String date, int userId) {
         List<Booking> bookings = new ArrayList<>();
         String query = "SELECT * FROM " + BookingConstants.TABLE_BOOKING + " WHERE date = ? AND userId = ? AND status = ?";
@@ -199,8 +206,51 @@ public class BookingDAO {
         return distinctDates;
     }
 
+    public List<Booking> getCompletedBookingsByUserId(int userId) {
+        List<Booking> bookings = new ArrayList<>();
+        String query = "SELECT * FROM " + BookingConstants.TABLE_BOOKING + " WHERE userId = ? AND status = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId), BookingConstants.SUCCESS});
 
+        if (cursor != null) {
+            try {
+                while (cursor.moveToNext()) {
+                    Booking booking = new Booking();
+                    booking.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+                    booking.setUserId(cursor.getInt(cursor.getColumnIndexOrThrow("userId")));
+                    booking.setDate(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                    booking.setTime(cursor.getString(cursor.getColumnIndexOrThrow("time")));
+                    booking.setContent(cursor.getString(cursor.getColumnIndexOrThrow("content")));
+                    booking.setStatus(cursor.getString(cursor.getColumnIndexOrThrow("status")));
+                    booking.setRating(cursor.getFloat(cursor.getColumnIndexOrThrow("rating")));
+                    bookings.add(booking);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return bookings;
+    }
 
+    public void updateBookingStatus(int bookingId, String status) {
+        ContentValues values = new ContentValues();
+        values.put("status", status);
+        int rowsAffected = db.update(BookingConstants.TABLE_BOOKING, values, "id = ?", new String[]{String.valueOf(bookingId)});
+        if (rowsAffected > 0) {
+            Log.i("BookingDAO", "Booking status updated successfully.");
+        } else {
+            Log.e("BookingDAO", "Error updating booking status.");
+        }
+    }
+    public void updateBookingRating(int bookingId, float rating) {
+        ContentValues values = new ContentValues();
+        values.put("rating", rating);
+        int rowsAffected = db.update(BookingConstants.TABLE_BOOKING, values, "id = ?", new String[]{String.valueOf(bookingId)});
+        if (rowsAffected > 0) {
+            Log.i("BookingDAO", "Booking rating updated successfully.");
+        } else {
+            Log.e("BookingDAO", "Error updating booking rating.");
+        }
+    }
 
 }
 

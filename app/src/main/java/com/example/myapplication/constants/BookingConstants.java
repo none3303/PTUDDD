@@ -18,4 +18,7 @@ public class BookingConstants {
     public static final String ACCEPT="Chấp nhận";
     public static final String PENDING="Đang chờ";
     public static final String REJECT="Từ chối";
+    public static final String FINISH = "Hoàn Thành";
+    public static final String FAIL = "Thất Bại";
+    public static final String SUCCESS = "Thành công";
 }

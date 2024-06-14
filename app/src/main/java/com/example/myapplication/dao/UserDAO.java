@@ -160,5 +160,19 @@ public class UserDAO {
         }
         return  Math.round(averageRating * 10.0) / 10.0f;
     }
+    public float calculateAverageRatingForUser1() {
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        String query = "SELECT AVG(" + BookingConstants.RATING + ") as average_rating " +
+                "FROM " + BookingConstants.TABLE_BOOKING +
+                " WHERE " + BookingConstants.STATUS + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{BookingConstants.FINISH});
+        float averageRating = 0;
+        if (cursor.moveToFirst()) {
+            averageRating = cursor.getFloat(cursor.getColumnIndexOrThrow("average_rating"));
+        }
+        cursor.close(); // Don't forget to close the cursor
+        return Math.round(averageRating * 10.0) / 10.0f;
+    }
+
 
 }
