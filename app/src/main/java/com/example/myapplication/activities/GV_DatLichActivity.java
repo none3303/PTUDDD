@@ -24,43 +24,50 @@ import com.google.android.material.tabs.TabLayout;
 
 public class GV_DatLichActivity extends AppCompatActivity {
 
+    private int currentTabPosition = 0;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    public int getCurrentTabPosition() {
+        return currentTabPosition;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gv_dat_lich);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ViewPager viewPager = findViewById(R.id.viewPager);
+
+        viewPager = findViewById(R.id.viewPager);
         GV_DatLichAdapter adapter = new GV_DatLichAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
 
-        //set up viewpager with tablayout
+        // Set up viewpager with tablayout
         tabLayout.setupWithViewPager(viewPager);
-        setColor(tabLayout,0,"Đang chờ",true);
-        setColor(tabLayout,1,"Chấp nhận",false);
-        setColor(tabLayout,2,"Từ chối",false);
+        setColor(tabLayout, 0, "Đang chờ", true);
+        setColor(tabLayout, 1, "Chấp nhận", false);
+        setColor(tabLayout, 2, "Từ chối", false);
+
         TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                setColor(tabLayout, position, tab.getText().toString(),true);
+                currentTabPosition = position;
+                setColor(tabLayout, position, tab.getText().toString(), true);
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                setColor(tabLayout, tab.getPosition(), tab.getText().toString(),false);
+                setColor(tabLayout, tab.getPosition(), tab.getText().toString(), false);
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         };
-        tabLayout.addOnTabSelectedListener(tabSelectedListener);
 
+        tabLayout.addOnTabSelectedListener(tabSelectedListener);
     }
     public void setColor(TabLayout tabLayout,int position, String text,boolean isActive){
         SpannableString spannableString = new SpannableString(text);

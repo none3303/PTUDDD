@@ -99,4 +99,5 @@ public class MainActivity_GV extends AppCompatActivity {
         transaction.replace(R.id.trangchuFragment, fragment);
         transaction.commit();
     }
+
 }
