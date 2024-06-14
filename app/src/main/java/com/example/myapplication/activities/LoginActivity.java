@@ -73,18 +73,18 @@ public class LoginActivity extends AppCompatActivity {
         userDAO=new UserDAO(this);
 //        // Chay 1 lan xong comment lai
 //        User tanh=new User();
-//        tanh.setUsername("tanh123");
+//        tanh.setUsername("tanh1234");
 //        tanh.setPassword("123");
-//        tanh.setFullName("Do Tien Anh");
+//        tanh.setFullName("Dang Thi Nhung");
 //        tanh.setIdCard("2021600552");
 //        tanh.setPhone("0865923203");
 //        tanh.setStudentCode("2021600552");
-//        tanh.setGender(UserConstants.GENDER_MALE);
+//        tanh.setGender(UserConstants.GENDER_FEMALE);
 //        tanh.setEmail("dtienanh1213@gmail.com");
 //        tanh.setDateOfBirth("19/09/2003");
 //        tanh.setAddress("Ha Noi");
 //        tanh.setPlaceOfBirth("Ha Noi");
-//        tanh.setRole(UserConstants.ROLE_STUDENT);
+//        tanh.setRole(UserConstants.ROLE_TEACHER);
 //        userDAO.addUser(tanh);
     }
 }

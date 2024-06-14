@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.constants.UserConstants;
 import com.example.myapplication.database.MyDatabaseHelper;
 import com.example.myapplication.models.User;
@@ -71,6 +72,32 @@ public class UserDAO {
 //        db.close();
         return null;
     }
+    public User getUserById(int userId) {
+        Cursor cursor = db.query(UserConstants.TABLE_USER, new String[]{"id", UserConstants.USERNAME, UserConstants.PASSWORD, UserConstants.FULL_NAME, UserConstants.GENDER, UserConstants.ADDRESS, UserConstants.PLACE_OF_BIRTH, UserConstants.DATE_OF_BIRTH, UserConstants.ID_CARD, UserConstants.EMAIL, UserConstants.PHONE, UserConstants.ROLE, UserConstants.STUDENT_CODE, UserConstants.TEACHER_ID},
+                "id = ?", new String[]{String.valueOf(userId)}, null, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                User user = new User(
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        cursor.getString(8),
+                        cursor.getString(9),
+                        cursor.getString(10),
+                        cursor.getString(11),
+                        cursor.getString(12),
+                        cursor.getString(13)
+                );
+                user.setId(cursor.getInt(0));
+                return user;
+            }
+        }
+        return null;
+    }
     public void deleteUser(int userId) {
         db.delete(UserConstants.TABLE_USER, "id" + " = ?", new String[]{String.valueOf(userId)});
 //        db.close();
@@ -121,6 +148,17 @@ public class UserDAO {
         }
 //        cursor.close();
         return userList;
+    }
+    public float calculateAverageRatingForUser() {
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        String query = "SELECT AVG(" + BookingConstants.RATING + ") as average_rating " +
+                "FROM " + BookingConstants.TABLE_BOOKING ;
+        Cursor cursor = db.rawQuery(query, null);
+        float averageRating = 0;
+        if (cursor.moveToFirst()) {
+            averageRating = cursor.getFloat(cursor.getColumnIndexOrThrow("average_rating"));
+        }
+        return  Math.round(averageRating * 10.0) / 10.0f;
     }
 
 }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -23,7 +22,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="8dp"
-                android:src="@drawable/home_icon_default"/>
+                android:src="@drawable/home_icon_selector"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +63,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="8dp"
-                android:src="@drawable/user_icon"/>
+                android:src="@drawable/user_icon_selector"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
