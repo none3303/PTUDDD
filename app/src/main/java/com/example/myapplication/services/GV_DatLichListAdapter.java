@@ -30,7 +30,6 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
     TextView tvNumber;
     TextView tvName;
     Button btnView;
-    //ImageView ivIcon;
     private List<Booking> originalBooks;
     private List<Booking> filteredBooks;
     private BookingDAO bookingDAO;
@@ -63,7 +62,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
 
         tvNumber.setText(String.valueOf(position + 1));
         UserDAO userDAO = new UserDAO(getContext());
-        User user = userDAO.getUserByStudentId(String.valueOf(booking.getUserId()));
+        User user = userDAO.getUserById(booking.getUserId());
         tvName.setText(user.getFullName());
 
         btnView.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +118,7 @@ public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
 
         // Set the booking details in the dialog
         UserDAO userDAO = new UserDAO(getContext());
-        User user = userDAO.getUserByStudentId(String.valueOf(booking.getUserId()));
+        User user = userDAO.getUserById(booking.getUserId());
         txtStudentName.setText(user.getFullName());
         txtStudentId.setText(String.valueOf(user.getIdCard()));
         txtClass.setText("2021DHCNTT01");  // Placeholder class, replace if needed

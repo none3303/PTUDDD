@@ -5,22 +5,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-//<<<<<<< HEAD
-//=======
 import android.util.Log;
-import android.widget.Toast;
-//>>>>>>> origin/ngdat
 
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.database.MyDatabaseHelper;
 import com.example.myapplication.models.Booking;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 
 public class BookingDAO {
@@ -178,11 +174,11 @@ public class BookingDAO {
         return db.update(BookingConstants.TABLE_BOOKING, values, "id = ?", new String[]{String.valueOf(booking.getId())});
     }
 
-    public void updateBookingStatus(int bookingId, String status) {
-        ContentValues values = new ContentValues();
-        values.put(BookingConstants.STATUS, status);
-        db.update(BookingConstants.TABLE_BOOKING, values, "id = ?", new String[]{String.valueOf(bookingId)});
-    }
+//    public void updateBookingStatus(int bookingId, String status) {
+//        ContentValues values = new ContentValues();
+//        values.put(BookingConstants.STATUS, status);
+//        db.update(BookingConstants.TABLE_BOOKING, values, "id = ?", new String[]{String.valueOf(bookingId)});
+//    }
 
     public void close() {
         dbHelper.close();
@@ -199,6 +195,7 @@ public class BookingDAO {
         values.put("userId", booking.getUserId());
         db.insert(BookingConstants.TABLE_BOOKING, null, values);
     }
+
     public List<String> getTimeByDate(String date) {
         List<String> times = new ArrayList<>();
         String query = "SELECT DISTINCT time FROM " + BookingConstants.TABLE_BOOKING + " WHERE date = ? AND status = ?";
