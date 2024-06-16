@@ -108,9 +108,10 @@ public class UserDAO {
             }
         }
     }
+
     public User getUserById(int userId) {
         Cursor cursor = db.query(UserConstants.TABLE_USER, new String[]{"id", UserConstants.USERNAME, UserConstants.PASSWORD, UserConstants.FULL_NAME, UserConstants.GENDER, UserConstants.ADDRESS, UserConstants.PLACE_OF_BIRTH, UserConstants.DATE_OF_BIRTH, UserConstants.ID_CARD, UserConstants.EMAIL, UserConstants.PHONE, UserConstants.ROLE, UserConstants.STUDENT_CODE, UserConstants.TEACHER_ID},
-                "idCard = ?", new String[]{String.valueOf(userId)}, null, null, null, null);
+                "id = ?", new String[]{String.valueOf(userId)}, null, null, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 User user = new User(
@@ -134,6 +135,7 @@ public class UserDAO {
         }
         return null;
     }
+
     public void deleteUser(int userId) {
         db.delete(UserConstants.TABLE_USER, "id" + " = ?", new String[]{String.valueOf(userId)});
 //        db.close();
