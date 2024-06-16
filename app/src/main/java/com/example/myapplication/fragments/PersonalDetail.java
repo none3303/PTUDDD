@@ -158,7 +158,7 @@ public class PersonalDetail extends Fragment {
             }
             else{
                 UserDAO userDAO=new UserDAO(this.getContext());
-                txtRating.setText(userDAO.calculateAverageRatingForUser()+"");
+                txtRating.setText(userDAO.calculateAverageRatingForUser1()+"");
                 imgStar.setVisibility(View.VISIBLE);
             }
         }
