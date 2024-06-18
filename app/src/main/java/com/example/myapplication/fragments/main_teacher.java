@@ -1,6 +1,7 @@
 package com.example.myapplication.fragments;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.CalendarView;
-import com.example.myapplication.Adapter.Adapter;
+import com.applandeo.materialcalendarview.EventDay;
+import com.example.myapplication.Adapter.Adapter_teacher;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.models.Booking;
@@ -23,25 +24,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class lichhen extends Fragment {
-
+public class main_teacher extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
     private static final String ARG_USER = "user";
     private User user;
     private RecyclerView recyclerView;
-    private Adapter itemAdapter;
+    private Adapter_teacher itemAdapter;
     private TextView txtThang,txtTongSo;
+    private String mParam1;
+    private String mParam2;
 
-    public lichhen() {
-        // Cần một constructor công khai rỗng
+    public main_teacher() {
+        // Required empty public constructor
     }
-
-    public static lichhen newInstance(User user) {
-        lichhen fragment = new lichhen();
+    public static main_teacher newInstance(User user) {
+        main_teacher fragment = new main_teacher();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);
@@ -52,39 +50,35 @@ public class lichhen extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            user = (User) getArguments().getSerializable(ARG_USER);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate layout cho fragment này
-        View view = inflater.inflate(R.layout.fragment_lichhen, container, false);
+        View view = inflater.inflate(R.layout.fragment_trangchu_gv, container, false);
 
         CalendarView calendarView = view.findViewById(R.id.calendarView);
-
-        // Lấy RecyclerView từ layout
-        recyclerView = view.findViewById(R.id.recyclerViewSV);
+        recyclerView = view.findViewById(R.id.recyclerViewGV);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Thiết lập listener cho CalendarView
         calendarView.setOnDayClickListener(eventDay -> {
             Calendar selectedDate = eventDay.getCalendar();
             String formattedDate = getFormattedDate(selectedDate);
 
             // Lấy danh sách booking theo ngày và userId
             BookingDAO bookingDAO = new BookingDAO(getContext());
-            ArrayList<Booking> bookings = (ArrayList<Booking>) bookingDAO.getBookingsByDateAndUser(formattedDate, user.getId());
+            ArrayList<Booking> bookings = (ArrayList<Booking>) bookingDAO.getBookingsByDate(formattedDate);
 
             // Cập nhật adapter với danh sách mới
-            itemAdapter = new Adapter(bookings);
+            itemAdapter = new Adapter_teacher(bookings);
             recyclerView.setAdapter(itemAdapter);
         });
 
         BookingDAO bookingDAO = new BookingDAO(getContext());
-        ArrayList<String> bookings = (ArrayList<String>) bookingDAO.getDistinctBookingDatesFromMonth(user.getId());
-        ArrayList<String> bookings1 = (ArrayList<String>) bookingDAO.getDistinctBookingDatesFromMonth4(user.getId());
+        ArrayList<String> bookings = (ArrayList<String>) bookingDAO.getDistinctBookingDatesFromMonth2();
+        ArrayList<String> bookings1 = (ArrayList<String>) bookingDAO.getDistinctBookingDatesFromMonth3();
         txtTongSo=view.findViewById(R.id.txtTongSo);
         txtTongSo.setText("Tổng số lịch hẹn: " + bookings1.size());
         txtThang=view.findViewById(R.id.txtThang);
@@ -123,7 +117,6 @@ public class lichhen extends Fragment {
         }
 
         calendarView.setEvents(events);
-
 
         return view;
     }

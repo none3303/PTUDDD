@@ -13,9 +13,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
-import com.example.myapplication.fragments.GV_DatLichFragment;
+import com.example.myapplication.fragments.GV_bookingFragment;
 import com.example.myapplication.fragments.PersonalDetail;
-import com.example.myapplication.fragments.trangchu_gv;
+import com.example.myapplication.fragments.main_teacher;
 import com.example.myapplication.models.User;
 
 public class MainActivity_GV extends AppCompatActivity {
@@ -75,7 +75,7 @@ public class MainActivity_GV extends AppCompatActivity {
     }
 
     private void displayDatLichFragment(User user) {
-        Fragment datLichFragment = GV_DatLichFragment.newInstance(user);
+        Fragment datLichFragment = GV_bookingFragment.newInstance(user);
         displayFragment(datLichFragment);
     }
 
@@ -85,7 +85,7 @@ public class MainActivity_GV extends AppCompatActivity {
     }
 
     private void displayTrangChuFragment(User user) {
-        Fragment trangChuFragment = trangchu_gv.newInstance(user);
+        Fragment trangChuFragment = main_teacher.newInstance(user);
         displayFragment(trangChuFragment);
     }
     private void displayCaNhanFragment(User user) {

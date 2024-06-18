@@ -21,7 +21,7 @@ import com.example.myapplication.models.User;
 import java.util.Calendar;
 import java.util.List;
 
-public class datlich extends Fragment {
+public class booking extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -50,12 +50,12 @@ public class datlich extends Fragment {
     private static final String ARG_USER = "user";
     private User user;
 
-    public datlich() {
+    public booking() {
         // Required empty public constructor
     }
 
-    public static datlich newInstance(User user) {
-        datlich fragment = new datlich();
+    public static booking newInstance(User user) {
+        booking fragment = new booking();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);
@@ -212,7 +212,7 @@ public class datlich extends Fragment {
         booking.setTime(time);
         booking.setContent(edtLyDo.getText().toString());
         booking.setStatus(BookingConstants.PENDING);
-        BookingDAO bookingDAO = new BookingDAO(datlich.this.getContext());
+        BookingDAO bookingDAO = new BookingDAO(com.example.myapplication.fragments.booking.this.getContext());
         bookingDAO.addBooking(booking);
         Toast.makeText(this.getContext(), "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
         editTextDate.setText("");

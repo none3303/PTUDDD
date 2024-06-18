@@ -20,10 +20,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.myapplication.R;
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
+import com.example.myapplication.fragments.NotificationsFragment;
 import com.example.myapplication.fragments.PersonalDetail;
-import com.example.myapplication.fragments.datlich;
-import com.example.myapplication.fragments.lichhen;
-import com.example.myapplication.fragments.trangchu_sv;
+import com.example.myapplication.fragments.booking;
+import com.example.myapplication.fragments.appointment;
+import com.example.myapplication.fragments.main_student;
 import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
 
@@ -63,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
     private void displayFragment(Fragment fragment, User user) {
         if (fragment instanceof PersonalDetail) {
             fragment = PersonalDetail.newInstance(user);
-        } else if (fragment instanceof trangchu_sv) {
-            fragment = trangchu_sv.newInstance(user);
-        } else if (fragment instanceof lichhen) {
-            fragment = lichhen.newInstance(user);
-        } else if (fragment instanceof datlich) {
-            fragment = datlich.newInstance(user);
+        } else if (fragment instanceof main_student) {
+            fragment = main_student.newInstance(user);
+        } else if (fragment instanceof appointment) {
+            fragment = appointment.newInstance(user);
+        } else if (fragment instanceof booking) {
+            fragment = booking.newInstance(user);
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.btnDatlichsv) {
                     displayDatLichFragment(user);
                 } else if (id == R.id.btnThongBaosv) {
-                    // Thêm phương thức hiển thị fragment cho "Thông báo" tại đây
+                    displayThongBaoFragment(user);
                 } else if (id == R.id.btnCaNhansv) {
                     displayCaNhanFragment(user);
                 }
@@ -133,23 +134,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayTrangChuFragment(User user) {
-        Fragment trangChuFragment = trangchu_sv.newInstance(user);
+        Fragment trangChuFragment = main_student.newInstance(user);
         displayFragment(trangChuFragment, user);
     }
 
     private void displayLichHenFragment(User user) {
-        Fragment lichHenFragment = lichhen.newInstance(user);
+        Fragment lichHenFragment = appointment.newInstance(user);
         displayFragment(lichHenFragment, user);
     }
 
     private void displayDatLichFragment(User user) {
-        Fragment datLichFragment = datlich.newInstance(user);
+        Fragment datLichFragment = booking.newInstance(user);
         displayFragment(datLichFragment, user);
     }
 
     private void displayCaNhanFragment(User user) {
         Fragment caNhanFragment = PersonalDetail.newInstance(user);
         displayFragment(caNhanFragment, user);
+    }
+
+    private void displayThongBaoFragment(User user) {
+        Fragment thongBaoFragment = NotificationsFragment.newInstance(user);
+        displayFragment(thongBaoFragment, user);
     }
 
     private void checkAndShowRatingDialog(User user) {

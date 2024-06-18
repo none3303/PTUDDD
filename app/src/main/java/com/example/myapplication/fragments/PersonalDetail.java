@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 
@@ -42,7 +43,7 @@ public class PersonalDetail extends Fragment {
 
 
 
-    private Button btnImportData;
+    private AppCompatButton btnImportData;
     public PersonalDetail() {
         // Required empty public constructor
     }
@@ -155,6 +156,7 @@ public class PersonalDetail extends Fragment {
             if(user.getRole().equals(UserConstants.ROLE_STUDENT)){
                 txtRating.setText("");
                 imgStar.setVisibility(View.INVISIBLE);
+                btnImportData.setVisibility(View.INVISIBLE);
             }
             else{
                 UserDAO userDAO=new UserDAO(this.getContext());

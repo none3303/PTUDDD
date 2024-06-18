@@ -19,23 +19,23 @@ import android.widget.Toast;
 import com.example.myapplication.constants.BookingConstants;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.dao.UserDAO;
-import com.example.myapplication.fragments.GV_DatLichFragment;
+import com.example.myapplication.fragments.GV_bookingFragment;
 import com.example.myapplication.models.Booking;
 import com.example.myapplication.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GV_DatLichListAdapter extends ArrayAdapter<Booking> {
+public class GV_bookingListAdapter extends ArrayAdapter<Booking> {
     TextView tvNumber;
     TextView tvName;
     Button btnView;
     private List<Booking> originalBooks;
     private List<Booking> filteredBooks;
     private BookingDAO bookingDAO;
-    private GV_DatLichFragment fragment;
+    private GV_bookingFragment fragment;
 
-    public GV_DatLichListAdapter(GV_DatLichFragment fragment, List<Booking> bookings) {
+    public GV_bookingListAdapter(GV_bookingFragment fragment, List<Booking> bookings) {
         super(fragment.getContext(), 0, bookings);
         this.fragment = fragment;
         this.originalBooks = new ArrayList<>(bookings);

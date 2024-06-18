@@ -20,16 +20,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.User;
-import com.example.myapplication.services.GV_DatLichAdapter;
+import com.example.myapplication.services.GV_bookingAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-public class GV_DatLichFragment extends Fragment {
+public class GV_bookingFragment extends Fragment {
     User user;
-    GV_DatLichAdapter adapter;
+    GV_bookingAdapter adapter;
     private static final String ARG_USER = "user";
 
-    public static GV_DatLichFragment newInstance(User user) {
-        GV_DatLichFragment fragment = new GV_DatLichFragment();
+    public static GV_bookingFragment newInstance(User user) {
+        GV_bookingFragment fragment = new GV_bookingFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);
@@ -47,7 +47,7 @@ public class GV_DatLichFragment extends Fragment {
         });
 
         ViewPager viewPager = view.findViewById(R.id.viewPager);
-        adapter = new GV_DatLichAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter = new GV_bookingAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);

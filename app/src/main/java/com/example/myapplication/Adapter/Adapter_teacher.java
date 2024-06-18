@@ -15,22 +15,22 @@ import com.example.myapplication.models.User;
 
 import java.util.ArrayList;
 
-public class Adapter_gv extends RecyclerView.Adapter<Adapter_gv.MyViewHolder> {
+public class Adapter_teacher extends RecyclerView.Adapter<Adapter_teacher.MyViewHolder> {
     private ArrayList<Booking> bookings;
 
-    public Adapter_gv(ArrayList<Booking> bookings) {
+    public Adapter_teacher(ArrayList<Booking> bookings) {
         this.bookings = bookings;
     }
 
     @NonNull
     @Override
-    public Adapter_gv.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Adapter_teacher.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chitiettheongay_gv, parent, false);
         return new MyViewHolder(itemView1); // Change ViewGroup to View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_gv.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adapter_teacher.MyViewHolder holder, int position) {
         Booking currentEmp = bookings.get(position);
         UserDAO userDAO = new UserDAO(holder.itemView.getContext());
         User user = userDAO.getUserById(currentEmp.getUserId());

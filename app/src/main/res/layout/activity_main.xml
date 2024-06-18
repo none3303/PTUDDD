@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            class="com.example.myapplication.fragments.trangchu_sv"
+            class="com.example.myapplication.fragments.main_student"
             tools:layout="@layout/fragment_trangchu_sv">
         </fragment>
     </LinearLayout>

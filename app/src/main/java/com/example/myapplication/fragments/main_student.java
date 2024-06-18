@@ -1,22 +1,15 @@
 package com.example.myapplication.fragments;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -30,19 +23,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class trangchu_sv extends Fragment {
+public class main_student extends Fragment {
     private static final String ARG_USER = "user";
     private User user;
     private TextView txtThoiGian,tv1,txtDiaDiem,txtDanhGia;
     private CardView cardView;
     private Button btnDatLich;
 
-    public trangchu_sv() {
+    public main_student() {
         // Required empty public constructor
     }
 
-    public static trangchu_sv newInstance(User user) {
-        trangchu_sv fragment = new trangchu_sv();
+    public static main_student newInstance(User user) {
+        main_student fragment = new main_student();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USER, user);
         fragment.setArguments(args);

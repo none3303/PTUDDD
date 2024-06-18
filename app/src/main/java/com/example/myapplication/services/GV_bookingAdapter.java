@@ -4,14 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.myapplication.fragments.Gv_ChapNhanTab;
-import com.example.myapplication.fragments.Gv_DangChoTab;
-import com.example.myapplication.fragments.Gv_TuChoiTab;
+import com.example.myapplication.fragments.Gv_acceptTab;
+import com.example.myapplication.fragments.Gv_pendingTab;
+import com.example.myapplication.fragments.Gv_rejectTab;
 
-public class GV_DatLichAdapter extends FragmentStatePagerAdapter {
-    public GV_DatLichAdapter(@NonNull FragmentManager fm, int behavior) {
+public class GV_bookingAdapter extends FragmentStatePagerAdapter {
+    public GV_bookingAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 
@@ -25,11 +24,11 @@ public class GV_DatLichAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new Gv_DangChoTab();
+                return new Gv_pendingTab();
             case 1:
-                return new Gv_ChapNhanTab();
+                return new Gv_acceptTab();
             case 2:
-                return new Gv_TuChoiTab();
+                return new Gv_rejectTab();
         }
         return null;
     }

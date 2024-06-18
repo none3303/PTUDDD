@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,9 +19,8 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.BookingDAO;
 import com.example.myapplication.models.Booking;
-import com.example.myapplication.services.GV_DatLichListAdapter;
+import com.example.myapplication.services.GV_bookingListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GV_BaseBookingTab extends Fragment {
@@ -30,7 +28,7 @@ public abstract class GV_BaseBookingTab extends Fragment {
     protected TextView txt_null;
     protected ListView listView;
     protected EditText searchEditText;
-    protected GV_DatLichListAdapter adapter;
+    protected GV_bookingListAdapter adapter;
     protected BookingDAO bookingDAO;
 
     public GV_BaseBookingTab() {
@@ -63,7 +61,7 @@ public abstract class GV_BaseBookingTab extends Fragment {
 
     public void setupListView() {
         List<Booking> bookings = getBookings();
-        adapter = new GV_DatLichListAdapter((GV_DatLichFragment) requireParentFragment(), bookings);  // Pass the parent fragment
+        adapter = new GV_bookingListAdapter((GV_bookingFragment) requireParentFragment(), bookings);  // Pass the parent fragment
         listView.setAdapter(adapter);
         registerForContextMenu(listView);
     }

@@ -9,14 +9,14 @@ import com.example.myapplication.models.Booking;
 
 import java.util.List;
 
-public class Gv_TuChoiTab extends GV_BaseBookingTab{
+public class Gv_rejectTab extends GV_BaseBookingTab{
 
-    public Gv_TuChoiTab() {
+    public Gv_rejectTab() {
         // Required empty public constructor
     }
 
-    public static Gv_TuChoiTab newInstance(String param1, String param2) {
-        Gv_TuChoiTab fragment = new Gv_TuChoiTab();
+    public static Gv_rejectTab newInstance(String param1, String param2) {
+        Gv_rejectTab fragment = new Gv_rejectTab();
         fragment.setArguments(new Bundle());
         return fragment;
     }
